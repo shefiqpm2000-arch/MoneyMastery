@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Dashboard — Money Mastery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --yellow: #FFD400;
+  --dark: #0a0a0e;
+  --card: #13131a;
+  --border: #1f1f28;
+  --text: #ffffff;
+  --muted: #8b8b9a;
+  --success: #00ff88;
+  --warning: #ff9500;
+  --error: #ff3b30;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--dark);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Login Screen */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top left, #2b2600, #0a0a0e 60%);
+  padding: 20px;
+}
+
+.login-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 50px 40px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+}
+
+.login-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-logo span {
+  color: var(--yellow);
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(255, 212, 0, 0.1);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: var(--yellow);
+  color: #000;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 212, 0, 0.3);
+}
+
+.error-msg {
+  color: var(--error);
+  font-size: 12px;
+  margin-top: 15px;
+  text-align: center;
+  display: none;
+}
+
+/* Dashboard */
+.dashboard {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: var(--yellow);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sync-status {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--dark);
+}
+
+.sync-status.success {
+  color: var(--success);
+}
+
+.sync-status.error {
+  color: var(--error);
+}
+
+.refresh-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.refresh-btn:hover {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+.logout-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--error);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 59, 48, 0.3);
+}
+
+.main-content {
+  padding: 40px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 42px;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--yellow), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--yellow);
+  margin-bottom: 8px;
+}
+
+.stat-change {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-change.positive {
+  color: var(--success);
+}
+
+.stat-change.negative {
+  color: var(--error);
+}
+
+/* Sections */
+.section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead {
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+td {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: rgba(255, 212, 0, 0.05);
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-success {
+  background: rgba(0, 255, 136, 0.2);
+  color: var(--success);
+}
+
+.status-pending {
+  background: rgba(255, 149, 0, 0.2);
+  color: var(--warning);
+}
+
+.status-failed {
+  background: rgba(255, 59, 48, 0.2);
+  color: var(--error);
+}
+
+code {
+  background: var(--dark);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--yellow);
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--yellow);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.export-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.alert {
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alert-warning {
+  background: rgba(255, 149, 0, 0.1);
+  border: 1px solid rgba(255, 149, 0, 0.3);
+  color: var(--warning);
+}
+
+.alert-info {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #00d4ff;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .header-left {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .main-content {
+    padding: 20px;
+  }
+  
+  .page-title {
+    font-size: 32px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Login Screen -->
+<div id="loginScreen" class="login-container">
+  <div class="login-box">
+    <div class="login-logo">Money<span>Mastery</span></div>
+    <form id="loginForm">
+      <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="username" required autocomplete="username">
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="login-btn">Login to Dashboard</button>
+      <div id="errorMsg" class="error-msg">Invalid credentials. Please try again.</div>
+    </form>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" class="dashboard">
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">Money<span>Mastery</span></div>
+    </div>
+    <div class="header-right">
+      <div id="syncStatus" class="sync-status">Syncing...</div>
+      <button class="refresh-btn" onclick="refreshDashboard()">↻ Refresh</button>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1 class="page-title">Sales Dashboard</h1>
+
+    <div id="alertContainer"></div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Revenue</div>
+        <div class="stat-value" id="totalRevenue">₹0</div>
+        <div class="stat-change positive">
+          ↑ <span id="revenueChange">0%</span> from last week
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Total Sales</div>
+        <div class="stat-value" id="totalSales">0</div>
+        <div class="stat-change positive">
+          ↑ <span id="salesChange">0</span> new sales
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Active Partners</div>
+        <div class="stat-value" id="activePartners">0</div>
+        <div class="stat-change positive">
+          + <span id="partnersChange">0</span> new partners
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Avg. Order Value</div>
+        <div class="stat-value" id="avgOrderValue">₹0</div>
+      </div>
+    </div>
+
+    <!-- Recent Sales -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Recent Sales</h2>
+        <button class="export-btn" onclick="exportSales()">↓ Export CSV</button>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Payment ID</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Referral Code</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="salesTableBody">
+            <tr>
+              <td colspan="5">
+                <div class="loading">
+                  <div class="spinner"></div>
+                  Loading sales data...
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Partner Performance -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Partner Performance</h2>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Referral Code</th>
+              <th>Sales</th>
+              <th>Revenue</th>
+              <th>Commission</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="partnersTableBody">
+            <tr>
+              <td colspan="5">
+                <div class="loading">
+                  <div class="spinner"></div>
+                  Loading partner data...
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// Configuration
+const CONFIG = {
+  validUsername: 'oraze',
+  validPassword: 'Akpksq@2000',
+  
+  // Google Apps Script API endpoint
+  salesApiEndpoint: 'https://script.google.com/macros/s/AKfycbxQv8Qwh9P_rA1X-ZuT0epJxDHMBWcbLarXfNtshILL1OG7FbArwiSKd5RYtKpTuWBNXw/exec',
+  
+  // Razorpay API key
+  razorpayKey: 'rzp_live_RueFKopFjNKDKo'
+};
+
+// Dashboard State
+let dashboardData = {
+  sales: [],
+  partners: [],
+  lastUpdate: null
+};
+
+let isRealData = false;
+
+// Authentication
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const errorMsg = document.getElementById('errorMsg');
+  
+  if (username === CONFIG.validUsername && password === CONFIG.validPassword) {
+    sessionStorage.setItem('authenticated', 'true');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    initDashboard();
+  } else {
+    errorMsg.style.display = 'block';
+    setTimeout(() => {
+      errorMsg.style.display = 'none';
+    }, 3000);
+  }
+});
+
+// Check authentication on load
+window.addEventListener('load', function() {
+  if (sessionStorage.getItem('authenticated') === 'true') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    initDashboard();
+  }
+});
+
+function logout() {
+  sessionStorage.removeItem('authenticated');
+  location.reload();
+}
+
+// Initialize Dashboard
+function initDashboard() {
+  console.log('Initializing dashboard...');
+  console.log('API Endpoint:', CONFIG.salesApiEndpoint);
+  fetchDashboardData();
+  // Auto-refresh every 60 seconds
+  setInterval(fetchDashboardData, 60000);
+}
+
+// Fetch Real Sales Data
+async function fetchDashboardData() {
+  const syncStatus = document.getElementById('syncStatus');
+  syncStatus.textContent = 'Syncing...';
+  syncStatus.className = 'sync-status';
+  
+  try {
+    console.log('Fetching data from:', CONFIG.salesApiEndpoint);
+    
+    const response = await fetch(CONFIG.salesApiEndpoint);
+    console.log('Response status:', response.status);
+    console.log('Response OK:', response.ok);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Response error:', errorText);
+      throw new Error(`HTTP ${response.status}: ${errorText}`);
+    }
+    
+    const data = await response.json();
+    console.log('Received data:', data);
+    
+    // Check if we got real sales data
+    if (data.sales && data.sales.length > 0) {
+      isRealData = true;
+      dashboardData.sales = data.sales;
+      dashboardData.lastUpdate = new Date();
+      
+      console.log(`Loaded ${data.sales.length} real sales`);
+      
+      syncStatus.textContent = `✓ Synced (${data.sales.length} sales)`;
+      syncStatus.className = 'sync-status success';
+      
+      // Remove any alerts
+      document.getElementById('alertContainer').innerHTML = '';
+    } else {
+      // No data yet - show info alert
+      console.log('No sales data yet, waiting for payments...');
+      isRealData = false;
+      dashboardData.sales = [];
+      
+      syncStatus.textContent = '⚠ No data yet';
+      syncStatus.className = 'sync-status error';
+      
+      showAlert('info', '📊 Waiting for first payment to appear. System is running and will update automatically.');
+    }
+    
+    // Calculate partner stats
+    calculatePartnerStats();
+    
+    // Update UI
+    updateDashboard();
+    
+  } catch (error) {
+    console.error('Error fetching dashboard data:', error);
+    
+    syncStatus.textContent = '✗ Sync failed';
+    syncStatus.className = 'sync-status error';
+    
+    showAlert('warning', `⚠ Could not connect to data source. ${error.message}`);
+    
+    // Show empty state
+    dashboardData.sales = [];
+    calculatePartnerStats();
+    updateDashboard();
+  }
+}
+
+function showAlert(type, message) {
+  const container = document.getElementById('alertContainer');
+  container.innerHTML = `
+    <div class="alert alert-${type}">
+      ${message}
+    </div>
+  `;
+}
+
+function calculatePartnerStats() {
+  const partners = new Map();
+  
+  dashboardData.sales.forEach(sale => {
+    if (sale.referralCode && sale.referralCode !== 'NO-REFERRAL' && sale.status === 'success') {
+      if (!partners.has(sale.referralCode)) {
+        partners.set(sale.referralCode, {
+          code: sale.referralCode,
+          sales: 0,
+          revenue: 0,
+          commission: 0
+        });
+      }
+      
+      const partner = partners.get(sale.referralCode);
+      partner.sales++;
+      partner.revenue += sale.amount;
+      partner.commission += 700; // ₹7 commission per sale
+    }
+  });
+  
+  dashboardData.partners = Array.from(partners.values())
+    .sort((a, b) => b.revenue - a.revenue);
+}
+
+function updateDashboard() {
+  updateStats();
+  updateSalesTable();
+  updatePartnersTable();
+}
+
+function updateStats() {
+  const successfulSales = dashboardData.sales.filter(s => s.status === 'success');
+  
+  const totalRevenue = successfulSales.reduce((sum, sale) => sum + sale.amount, 0);
+  const totalSales = successfulSales.length;
+  const activePartners = dashboardData.partners.length;
+  const avgOrderValue = totalSales > 0 ? totalRevenue / totalSales : 0;
+  
+  // Update stat cards
+  document.getElementById('totalRevenue').textContent = `₹${(totalRevenue / 100).toLocaleString('en-IN')}`;
+  document.getElementById('totalSales').textContent = totalSales.toLocaleString();
+  document.getElementById('activePartners').textContent = activePartners;
+  document.getElementById('avgOrderValue').textContent = `₹${(avgOrderValue / 100).toFixed(0)}`;
+  
+  // Calculate week-over-week changes
+  const now = new Date();
+  const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  
+  const thisWeekSales = successfulSales.filter(s => new Date(s.date) >= oneWeekAgo);
+  const thisWeekRevenue = thisWeekSales.reduce((sum, sale) => sum + sale.amount, 0);
+  
+  const revenueGrowth = totalRevenue > 0 ? ((thisWeekRevenue / totalRevenue) * 100).toFixed(0) : 0;
+  
+  document.getElementById('revenueChange').textContent = `${revenueGrowth}%`;
+  document.getElementById('salesChange').textContent = thisWeekSales.length;
+}
+
+function updateSalesTable() {
+  const tbody = document.getElementById('salesTableBody');
+  const recentSales = dashboardData.sales
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 20);
+  
+  if (recentSales.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5">
+          <div class="empty-state">
+            <div class="empty-state-icon">📊</div>
+            <p>No sales data yet</p>
+            <p style="font-size: 12px; margin-top: 10px; color: var(--muted);">
+              Waiting for first payment. System will update automatically.
+            </p>
+          </div>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+  
+  tbody.innerHTML = recentSales.map(sale => `
+    <tr>
+      <td><code>${sale.paymentId}</code></td>
+      <td>${formatDate(sale.date)}</td>
+      <td><strong>₹${(sale.amount / 100).toFixed(2)}</strong></td>
+      <td>${sale.referralCode === 'NO-REFERRAL' ? '<em>Direct</em>' : sale.referralCode}</td>
+      <td><span class="status-badge status-${sale.status}">${sale.status}</span></td>
+    </tr>
+  `).join('');
+}
+
+function updatePartnersTable() {
+  const tbody = document.getElementById('partnersTableBody');
+  const topPartners = dashboardData.partners.slice(0, 10);
+  
+  if (topPartners.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5">
+          <div class="empty-state">
+            <div class="empty-state-icon">👥</div>
+            <p>No partner data yet</p>
+            <p style="font-size: 12px; margin-top: 10px; color: var(--muted);">
+              Partners will appear after referral sales.
+            </p>
+          </div>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+  
+  tbody.innerHTML = topPartners.map(partner => `
+    <tr>
+      <td><strong>${partner.code}</strong></td>
+      <td>${partner.sales}</td>
+      <td>₹${(partner.revenue / 100).toFixed(2)}</td>
+      <td><strong style="color: var(--success)">₹${(partner.commission / 100).toFixed(2)}</strong></td>
+      <td><span class="status-badge status-success">Active</span></td>
+    </tr>
+  `).join('');
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('en-IN', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(date);
+}
+
+function refreshDashboard() {
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.textContent = '↻ Refreshing...';
+  btn.disabled = true;
+  
+  fetchDashboardData().finally(() => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+  });
+}
+
+function exportSales() {
+  const successfulSales = dashboardData.sales.filter(s => s.status === 'success');
+  
+  if (successfulSales.length === 0) {
+    alert('No sales data to export yet.');
+    return;
+  }
+  
+  let csv = 'Payment ID,Date,Amount (₹),Referral Code,Status\n';
+  
+  successfulSales.forEach(sale => {
+    csv += `${sale.paymentId},${formatDate(sale.date)},${(sale.amount / 100).toFixed(2)},${sale.referralCode},${sale.status}\n`;
+  });
+  
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sales-export-${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
+
+function generateRandomId() {
+  return Math.random().toString(36).substring(2, 15);
+}
+
+// Debug helper - press 'D' key to see console info
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'd' || e.key === 'D') {
+    console.log('=== DASHBOARD DEBUG INFO ===');
+    console.log('API Endpoint:', CONFIG.salesApiEndpoint);
+    console.log('Is Real Data:', isRealData);
+    console.log('Sales Count:', dashboardData.sales.length);
+    console.log('Partners Count:', dashboardData.partners.length);
+    console.log('Last Update:', dashboardData.lastUpdate);
+    console.log('==========================');
+  }
+});
+</script>
+
+</body>
+</html>

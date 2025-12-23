@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be a Partner – Money Mastery</title>
+
+<style>
+:root {
+  --yellow: #FFD400;
+  --dark: #0b0b0f;
+  --card: #14141c;
+  --text: #ffffff;
+  --muted: #b5b5b5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top left, #2b2600, #0b0b0f 60%);
+  color: var(--text);
+}
+
+header {
+  padding: 30px 60px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: var(--yellow);
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.container h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.container h1 span {
+  color: var(--yellow);
+}
+
+.container p {
+  color: var(--muted);
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin-bottom: 70px;
+}
+
+.step {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,212,0,0.15);
+}
+
+.step h3 {
+  color: var(--yellow);
+  margin-bottom: 10px;
+}
+
+.commission-box {
+  background: linear-gradient(145deg, #14141c, #0f0f14);
+  border: 1px solid rgba(255,212,0,0.2);
+  border-radius: 22px;
+  padding: 45px 30px;
+  margin-bottom: 60px;
+}
+
+.commission-box h2 {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 30px;
+}
+
+.commission-box h2 span {
+  color: var(--yellow);
+}
+
+.commission-box ul {
+  list-style: none;
+  max-width: 520px;
+  margin: auto;
+  text-align: left;
+}
+
+.commission-box li {
+  font-size: 17px;
+  margin-bottom: 18px;
+  padding-left: 26px;
+  position: relative;
+  color: var(--muted);
+}
+
+.commission-box li::before {
+  content: "✔";
+  color: var(--yellow);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.apply-btn {
+  background: var(--yellow);
+  color: #000;
+  border: none;
+  padding: 18px 44px;
+  border-radius: 35px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.apply-btn:hover {
+  background: #ffdf33;
+  box-shadow: 0 0 25px rgba(255,212,0,0.6);
+  transform: translateY(-2px);
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 20px;
+  }
+  .container h1 {
+    font-size: 36px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Money<span>Mastery</span></div>
+</header>
+
+<section class="container">
+  <h1>Become a <span>Partner</span></h1>
+  <p>
+    Promote Money Mastery, help people learn high-income skills,
+    and earn rewards for every successful referral.
+  </p>
+
+  <div class="steps">
+    <div class="step">
+      <h3>1. Apply</h3>
+      <p>Fill out the partner application form.</p>
+    </div>
+    <div class="step">
+      <h3>2. Get Your Code</h3>
+      <p>Receive your unique referral code via email.</p>
+    </div>
+    <div class="step">
+      <h3>3. Share</h3>
+      <p>Promote your referral code to your audience.</p>
+    </div>
+    <div class="step">
+      <h3>4. Earn</h3>
+      <p>Get paid for every successful purchase.</p>
+    </div>
+  </div>
+
+  <div class="commission-box">
+    <h2>Commission <span>Structure</span></h2>
+    <ul>
+      <li>Earn for every successful purchase</li>
+      <li><strong>No minimum payout</strong></li>
+      <li>Payouts processed <strong>weekly</strong></li>
+      <li>Only <strong>successful, non-refunded</strong> payments count</li>
+    </ul>
+  </div>
+
+  <button class="apply-btn" id="applyBtn">Apply Now</button>
+</section>
+
+<footer>
+  © 2025 Money Mastery Academy
+</footer>
+
+<script>
+  // 📌 UPDATED FORM LINK
+  const partnerFormLink =
+    "https://docs.google.com/forms/d/e/1FAIpQLSegjE6PesUJqTwAvLadlUOCkx2b8yFEERpvzvkWcvoP2h1I_Q/viewform?usp=header";
+
+  document.getElementById("applyBtn").addEventListener("click", () => {
+    window.open(partnerFormLink, "_blank");
+  });
+</script>
+
+</body>
+</html>

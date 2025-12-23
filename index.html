@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Money Mastery Academy – Learn high-income skills and build your digital empire."/>
+
+<title>Money Mastery</title>
+
+<style>
+:root{
+  --yellow:#FFD400;
+  --dark:#0b0b0f;
+  --card:#14141c;
+  --text:#fff;
+  --muted:#b5b5b5;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:radial-gradient(circle at top left,#2b2600,#0b0b0f 60%);
+  color:var(--text);
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:30px 60px;
+}
+
+.logo{font-size:28px;font-weight:bold}
+.logo span{color:var(--yellow)}
+
+.header-btn{
+  background:var(--yellow);
+  border:none;
+  padding:12px 26px;
+  border-radius:30px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.hero{
+  padding:80px 60px 120px;
+  max-width:1100px;
+}
+
+.hero h1{
+  font-size:60px;
+  line-height:1.2;
+  margin-bottom:20px;
+}
+
+.hero h1 span{color:var(--yellow)}
+
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  margin-bottom:35px;
+}
+
+.outline-btn{
+  padding:14px 36px;
+  border-radius:30px;
+  border:2px solid var(--yellow);
+  background:transparent;
+  color:var(--yellow);
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.section{
+  padding:100px 60px;
+  text-align:center;
+}
+
+.section h2{
+  font-size:40px;
+  margin-bottom:60px;
+}
+
+.courses{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.course-card{
+  background:var(--card);
+  padding:30px;
+  border-radius:20px;
+  font-size:18px;
+}
+
+.proof-section{
+  padding:100px 60px;
+  text-align:center;
+}
+
+.proof-section h2{
+  font-size:42px;
+  margin-bottom:60px;
+}
+
+.proof-grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+.proof-card{
+  background:#0f0f14;
+  border-radius:18px;
+  padding:14px;
+  border:1px solid rgba(255,212,0,.15);
+}
+
+.proof-card img{
+  width:100%;
+  border-radius:14px;
+}
+
+.price-box{
+  max-width:420px;
+  margin:auto;
+  background:var(--card);
+  padding:50px;
+  border-radius:25px;
+  box-shadow:0 0 60px rgba(255,212,0,.15);
+}
+
+.offer-text{
+  font-size:14px;
+  font-weight:bold;
+  color:var(--yellow);
+}
+
+.original-price{
+  color:var(--muted);
+  text-decoration:line-through;
+}
+
+.price{
+  font-size:48px;
+  color:var(--yellow);
+  margin:20px 0;
+}
+
+.ref-input{
+  width:100%;
+  padding:12px;
+  border-radius:25px;
+  border:none;
+  margin-bottom:15px;
+  text-align:center;
+}
+
+.buy-btn{
+  width:100%;
+  background:var(--yellow);
+  border:none;
+  padding:14px;
+  border-radius:30px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* LEGAL FOOTER */
+.site-footer{
+  background:#0b0b0f;
+  padding:40px 20px;
+  text-align:center;
+  border-top:1px solid rgba(255,212,0,0.15);
+}
+
+.footer-links{
+  margin-bottom:15px;
+}
+
+.footer-links a{
+  color:#FFD400;
+  text-decoration:none;
+  font-size:14px;
+  margin:0 6px;
+}
+
+.footer-links a:hover{
+  text-decoration:underline;
+}
+
+.footer-links span{
+  color:#555;
+  font-size:14px;
+}
+
+.footer-copy{
+  color:#777;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Money<span>Mastery</span></div>
+  <button class="header-btn" onclick="location.href='be-a-partner.html'">
+    Be a Partner
+  </button>
+</header>
+
+<section class="hero">
+  <h1>Learn High-Income Skills<br><span>Build Your Digital Empire</span></h1>
+  <p>Premium money-making courses designed for ambitious youngsters.</p>
+  <button class="outline-btn" onclick="scrollToPricing()">BUY NOW</button>
+</section>
+
+<section class="section">
+  <h2>Our Premium Courses</h2>
+  <div class="courses">
+    <div class="course-card">AI Automation Business</div>
+    <div class="course-card">Crypto Business Master Course
+</div>
+    <div class="course-card">Discipline Not Destiny</div>
+    <div class="course-card">Affiliate Marketing</div>
+    <div class="course-card">Full Export Business Course</div>
+    <div class="course-card">ICT Strategy</div>
+  </div>
+</section>
+
+<section class="proof-section">
+  <h2>OUR STUDENTS ARE WINNING</h2>
+  <div class="proof-grid">
+    <div class="proof-card"><img src="images/proof1.jpg" alt="Student proof 1"></div>
+    <div class="proof-card"><img src="images/proof2.jpg" alt="Student proof 2"></div>
+    <div class="proof-card"><img src="images/proof3.jpg" alt="Student proof 3"></div>
+    <div class="proof-card"><img src="images/proof4.jpg" alt="Student proof 4"></div>
+    <div class="proof-card"><img src="images/proof5.jpg" alt="Student proof 5"></div>
+    <div class="proof-card"><img src="images/proof6.jpg" alt="Student proof 6"></div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <h2>Start Your Success Journey Today</h2>
+  <p style="color:var(--muted);margin-bottom:30px;">
+    Instant access to all premium courses
+  </p>
+
+  <div class="price-box">
+    <h3>ALL COURSES BUNDLE</h3>
+    <div class="offer-text">OFFER ENDS SOON</div>
+    <div class="original-price">₹499 / Book</div>
+    <div class="price" id="priceText">₹18 ONLY</div>
+
+    <input id="refCode" class="ref-input"
+      placeholder="Enter Referral Code (Optional)"
+      oninput="handleReferralChange()">
+
+    <button class="buy-btn" onclick="buyNow()">BUY NOW</button>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <span>|</span>
+    <a href="terms.html">Terms & Conditions</a>
+    <span>|</span>
+    <a href="refund.html">Refund Policy</a>
+    <span>|</span>
+    <a href="disclaimer.html">Disclaimer</a>
+  </div>
+  <div class="footer-copy">
+    © 2025 Money Mastery Academy. All rights reserved.
+  </div>
+</footer>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+const REFERRAL_API =
+"https://script.google.com/macros/s/AKfycbzAHVxq76EjLwd9LYNlvoVWkLx1TPn3T5aY3Ca8gtUGkKXv3ZVATZee2uoOEEDtB3ve/exec";
+
+let referralStatus = "EMPTY";
+let payableAmount = 1800;
+let typingTimer;
+
+function scrollToPricing(){
+  document.getElementById("pricing").scrollIntoView({behavior:"smooth"});
+}
+
+function handleReferralChange(){
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(validateReferral, 600);
+}
+
+function validateReferral(){
+  const code = document.getElementById("refCode").value.trim();
+  const priceEl = document.getElementById("priceText");
+
+  if(code === ""){
+    referralStatus = "EMPTY";
+    payableAmount = 1800;
+    priceEl.innerHTML = "₹18 ONLY";
+    return;
+  }
+
+  fetch(`${REFERRAL_API}?code=${encodeURIComponent(code)}`)
+    .then(res => res.text())
+    .then(result => {
+      if(result === "VALID"){
+        referralStatus = "VALID";
+        payableAmount = 1400;
+        priceEl.innerHTML =
+          "₹14 <span style='font-size:14px;color:#00ff66'>(Referral Applied)</span>";
+      } else {
+        referralStatus = "INVALID";
+        payableAmount = 1800;
+        priceEl.innerHTML = "₹18 ONLY";
+      }
+    })
+    .catch(() => {
+      alert("Referral system unavailable. Try again later.");
+    });
+}
+
+function buyNow(){
+  if(referralStatus === "INVALID"){
+    alert("Invalid referral code. Remove it or enter a valid one.");
+    return;
+  }
+
+  const referral =
+    document.getElementById("refCode").value.trim() || "NO-REFERRAL";
+
+  const options = {
+    key: "rzp_live_RueFKopFjNKDKo",
+    amount: payableAmount,
+    currency: "INR",
+    name: "Money Mastery Academy",
+    description: "All Courses Bundle",
+    payment_capture: 1,  // CRITICAL: 1 = auto-capture, 0 = manual capture
+    notes:{
+      referral_code: referral,
+      final_amount: payableAmount
+    },
+    handler: function (response) {
+      console.log("Payment ID:", response.razorpay_payment_id);
+      window.location.href = "success.html";
+    }
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.open();
+}
+</script>
+
+</body>
+</html>
