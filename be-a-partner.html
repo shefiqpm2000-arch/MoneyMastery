@@ -26,6 +26,7 @@ body {
   color: var(--text);
 }
 
+/* HEADER */
 header {
   padding: 30px 60px;
 }
@@ -39,6 +40,7 @@ header {
   color: var(--yellow);
 }
 
+/* MAIN */
 .container {
   max-width: 900px;
   margin: auto;
@@ -61,6 +63,7 @@ header {
   margin-bottom: 50px;
 }
 
+/* STEPS */
 .steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -80,6 +83,7 @@ header {
   margin-bottom: 10px;
 }
 
+/* COMMISSION BOX */
 .commission-box {
   background: linear-gradient(145deg, #14141c, #0f0f14);
   border: 1px solid rgba(255,212,0,0.2);
@@ -121,6 +125,7 @@ header {
   font-weight: bold;
 }
 
+/* BUTTON */
 .apply-btn {
   background: var(--yellow);
   color: #000;
@@ -139,13 +144,40 @@ header {
   transform: translateY(-2px);
 }
 
-footer {
+/* FOOTER */
+.site-footer {
   text-align: center;
-  padding: 30px;
-  color: #777;
-  font-size: 14px;
+  padding: 35px 20px;
+  background: #0b0b0f;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
+.footer-links {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #b5b5b5;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 0 6px;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--yellow);
+}
+
+.footer-links span {
+  color: #444;
+}
+
+.site-footer p {
+  font-size: 13px;
+  color: #777;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
   header {
     padding: 20px;
@@ -202,12 +234,20 @@ footer {
   <button class="apply-btn" id="applyBtn">Apply Now</button>
 </section>
 
-<footer>
-  © 2025 Money Mastery Academy
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <span>|</span>
+    <a href="terms.html">Terms & Conditions</a>
+    <span>|</span>
+    <a href="refund.html">Refund Policy</a>
+    <span>|</span>
+    <a href="disclaimer.html">Disclaimer</a>
+  </div>
+  <p>© 2025 Money Mastery Academy. All rights reserved.</p>
 </footer>
 
 <script>
-  // 📌 UPDATED FORM LINK
   const partnerFormLink =
     "https://docs.google.com/forms/d/e/1FAIpQLSegjE6PesUJqTwAvLadlUOCkx2b8yFEERpvzvkWcvoP2h1I_Q/viewform?usp=header";
 
