@@ -140,6 +140,79 @@ header{
   letter-spacing:1px;
 }
 
+/* FLOWCHART */
+.flowchart{
+  max-width:900px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+}
+
+.flow-item{
+  background:linear-gradient(135deg, #1a1a24 0%, #14141c 100%);
+  padding:32px 28px;
+  border-radius:20px;
+  border:2px solid rgba(255,212,0,0.2);
+  position:relative;
+  transition:all 0.4s ease;
+  text-align:center;
+  box-shadow:0 4px 15px rgba(0,0,0,0.3);
+  overflow:hidden;
+}
+
+.flow-item::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:linear-gradient(90deg, var(--yellow), #ffa500);
+  transform:scaleX(0);
+  transition:transform 0.4s ease;
+}
+
+.flow-item:hover::before{
+  transform:scaleX(1);
+}
+
+.flow-item:hover{
+  border-color:var(--yellow);
+  transform:translateY(-8px);
+  box-shadow:0 12px 30px rgba(255,212,0,0.25);
+}
+
+.flow-number{
+  background:linear-gradient(135deg, var(--yellow), #ffa500);
+  color:#0b0b0f;
+  width:64px;
+  height:64px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:32px;
+  margin:0 auto 20px;
+  box-shadow:0 8px 20px rgba(255,212,0,0.3);
+  flex-shrink:0;
+}
+
+.flow-content h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;
+  letter-spacing:1px;
+  margin-bottom:12px;
+  color:var(--yellow);
+}
+
+.flow-content p{
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.7;
+}
+
 /* COURSES */
 .courses{
   display:grid;
@@ -356,6 +429,24 @@ header{
     padding:80px 40px;
   }
   
+  .flowchart{
+    max-width:800px;
+  }
+  
+  .flow-number{
+    width:72px;
+    height:72px;
+    font-size:36px;
+  }
+  
+  .flow-content h3{
+    font-size:26px;
+  }
+  
+  .flow-content p{
+    font-size:16px;
+  }
+  
   .courses{
     grid-template-columns:repeat(2, 1fr);
     gap:20px;
@@ -390,6 +481,30 @@ header{
   
   .section{
     padding:100px 60px;
+  }
+  
+  .flowchart{
+    max-width:1000px;
+    grid-template-columns:repeat(2, 1fr);
+    gap:28px;
+  }
+  
+  .flow-item{
+    padding:40px 32px;
+  }
+  
+  .flow-number{
+    width:80px;
+    height:80px;
+    font-size:40px;
+  }
+  
+  .flow-content h3{
+    font-size:28px;
+  }
+  
+  .flow-content p{
+    font-size:16px;
   }
   
   .courses{
@@ -429,6 +544,40 @@ header{
   <h1>Learn High-Income Skills<span>Build Your Digital Empire</span></h1>
   <p>Premium money-making courses designed for ambitious youngsters ready to transform their financial future.</p>
   <button class="outline-btn" onclick="scrollToPricing()">BUY NOW</button>
+</section>
+
+<section class="section">
+  <h2>How It Works</h2>
+  <div class="flowchart">
+    <div class="flow-item">
+      <div class="flow-number">1</div>
+      <div class="flow-content">
+        <h3>What You Get</h3>
+        <p>Premium digital ebooks packed with actionable business strategies and high-income skills. Each book is a complete roadmap designed for real results.</p>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-number">2</div>
+      <div class="flow-content">
+        <h3>Who Can Use This</h3>
+        <p>Anyone! Students, working professionals, homemakers, or complete beginners with zero knowledge. No prior experience needed to start your journey.</p>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-number">3</div>
+      <div class="flow-content">
+        <h3>How to Study</h3>
+        <p>Read at your own pace. Follow step-by-step instructions. Implement one strategy at a time. Practice daily and track your progress.</p>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-number">4</div>
+      <div class="flow-content">
+        <h3>Start Earning</h3>
+        <p>Apply the business ideas immediately. Build your skills. Launch your venture. Transform knowledge into real income.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="section">
@@ -498,8 +647,6 @@ header{
     © 2025 MoneyMastery.in. All rights reserved.
   </div>
 </footer>
-
-
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
