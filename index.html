@@ -7,207 +7,411 @@
 
 <title>Money Mastery</title>
 
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --yellow:#FFD400;
   --dark:#0b0b0f;
   --card:#14141c;
   --text:#fff;
-  --muted:#b5b5b5;
+  --muted:#9ca3af;
 }
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
   background:radial-gradient(circle at top left,#2b2600,#0b0b0f 60%);
   color:var(--text);
+  font-family:'Sora',sans-serif;
+  overflow-x:hidden;
 }
 
+/* HEADER */
 header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:30px 60px;
+  padding:20px 24px;
+  position:relative;
+  z-index:10;
 }
 
-.logo{font-size:28px;font-weight:bold}
-.logo span{color:var(--yellow)}
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;
+  letter-spacing:1px;
+  font-weight:400;
+}
+
+.logo span{
+  color:var(--yellow);
+}
 
 .header-btn{
   background:var(--yellow);
   border:none;
-  padding:12px 26px;
-  border-radius:30px;
-  font-weight:bold;
+  padding:10px 20px;
+  border-radius:24px;
+  font-weight:600;
+  font-size:14px;
   cursor:pointer;
+  color:#0b0b0f;
+  transition:all 0.3s ease;
+  font-family:'Sora',sans-serif;
 }
 
+.header-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(255,212,0,0.3);
+}
+
+/* HERO SECTION */
 .hero{
-  padding:80px 60px 120px;
-  max-width:1100px;
+  padding:40px 24px 60px;
+  max-width:100%;
+  text-align:center;
 }
 
 .hero h1{
-  font-size:60px;
-  line-height:1.2;
-  margin-bottom:20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px, 10vw, 56px);
+  line-height:1.1;
+  margin-bottom:16px;
+  letter-spacing:1px;
+  animation:fadeInUp 0.8s ease;
 }
 
-.hero h1 span{color:var(--yellow)}
+.hero h1 span{
+  color:var(--yellow);
+  display:block;
+  margin-top:8px;
+}
 
 .hero p{
   color:var(--muted);
-  font-size:18px;
-  margin-bottom:35px;
+  font-size:16px;
+  line-height:1.6;
+  margin-bottom:32px;
+  max-width:500px;
+  margin-left:auto;
+  margin-right:auto;
+  animation:fadeInUp 0.8s ease 0.2s backwards;
 }
 
 .outline-btn{
-  padding:14px 36px;
+  padding:14px 40px;
   border-radius:30px;
   border:2px solid var(--yellow);
   background:transparent;
   color:var(--yellow);
-  font-weight:bold;
+  font-weight:600;
   cursor:pointer;
+  font-size:15px;
+  transition:all 0.3s ease;
+  font-family:'Sora',sans-serif;
+  animation:fadeInUp 0.8s ease 0.4s backwards;
 }
 
+.outline-btn:hover{
+  background:var(--yellow);
+  color:#0b0b0f;
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(255,212,0,0.3);
+}
+
+/* SECTIONS */
 .section{
-  padding:100px 60px;
+  padding:60px 24px;
   text-align:center;
 }
 
 .section h2{
-  font-size:40px;
-  margin-bottom:60px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(32px, 8vw, 42px);
+  margin-bottom:40px;
+  letter-spacing:1px;
 }
 
+/* COURSES */
 .courses{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-  max-width:1100px;
-  margin:auto;
+  grid-template-columns:1fr;
+  gap:16px;
+  max-width:500px;
+  margin:0 auto;
 }
 
 .course-card{
-  background:var(--card);
-  padding:30px;
-  border-radius:20px;
-  font-size:18px;
+  background:linear-gradient(135deg, #1a1a24 0%, #14141c 100%);
+  padding:24px;
+  border-radius:16px;
+  font-size:16px;
+  font-weight:600;
+  border:1px solid rgba(255,212,0,0.1);
+  transition:all 0.3s ease;
+  text-align:center;
 }
 
+.course-card:hover{
+  border-color:var(--yellow);
+  transform:translateY(-4px);
+  box-shadow:0 12px 24px rgba(255,212,0,0.15);
+}
+
+/* PROOF SECTION */
 .proof-section{
-  padding:100px 60px;
+  padding:60px 24px;
   text-align:center;
 }
 
 .proof-section h2{
-  font-size:42px;
-  margin-bottom:60px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(32px, 8vw, 42px);
+  margin-bottom:40px;
+  letter-spacing:1px;
 }
 
 .proof-grid{
-  max-width:1100px;
-  margin:auto;
+  max-width:500px;
+  margin:0 auto;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
+  grid-template-columns:1fr;
+  gap:16px;
 }
 
 .proof-card{
   background:#0f0f14;
-  border-radius:18px;
-  padding:14px;
-  border:1px solid rgba(255,212,0,.15);
+  border-radius:16px;
+  padding:12px;
+  border:1px solid rgba(255,212,0,.12);
+  overflow:hidden;
 }
 
 .proof-card img{
   width:100%;
-  border-radius:14px;
+  border-radius:12px;
+  display:block;
 }
 
+/* PRICING */
 .price-box{
-  max-width:420px;
-  margin:auto;
-  background:var(--card);
-  padding:50px;
-  border-radius:25px;
-  box-shadow:0 0 60px rgba(255,212,0,.15);
+  max-width:400px;
+  margin:0 auto;
+  background:linear-gradient(135deg, #1a1a24 0%, #14141c 100%);
+  padding:40px 28px;
+  border-radius:24px;
+  box-shadow:0 0 40px rgba(255,212,0,.2);
+  border:1px solid rgba(255,212,0,0.15);
+}
+
+.price-box h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;
+  letter-spacing:1px;
+  margin-bottom:12px;
 }
 
 .offer-text{
-  font-size:14px;
-  font-weight:bold;
+  font-size:13px;
+  font-weight:700;
   color:var(--yellow);
+  margin-bottom:8px;
 }
 
 .original-price{
   color:var(--muted);
   text-decoration:line-through;
+  font-size:14px;
+  margin-bottom:8px;
 }
 
 .price{
+  font-family:'Bebas Neue',sans-serif;
   font-size:48px;
   color:var(--yellow);
-  margin:20px 0;
+  margin:12px 0 24px;
+  letter-spacing:1px;
 }
 
 .ref-input{
   width:100%;
-  padding:12px;
-  border-radius:25px;
-  border:none;
-  margin-bottom:15px;
+  padding:14px 16px;
+  border-radius:12px;
+  border:1px solid rgba(255,212,0,0.2);
+  margin-bottom:16px;
   text-align:center;
+  background:rgba(255,255,255,0.05);
+  color:var(--text);
+  font-family:'Sora',sans-serif;
+  font-size:14px;
+}
+
+.ref-input::placeholder{
+  color:var(--muted);
+}
+
+.ref-input:focus{
+  outline:none;
+  border-color:var(--yellow);
 }
 
 .buy-btn{
   width:100%;
   background:var(--yellow);
   border:none;
-  padding:14px;
-  border-radius:30px;
-  font-size:18px;
-  font-weight:bold;
+  padding:16px;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:700;
   cursor:pointer;
+  color:#0b0b0f;
+  font-family:'Sora',sans-serif;
+  transition:all 0.3s ease;
 }
 
-/* LEGAL FOOTER */
+.buy-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(255,212,0,0.4);
+}
+
+/* FOOTER */
 .site-footer{
   background:#0b0b0f;
-  padding:40px 20px;
+  padding:32px 24px;
   text-align:center;
   border-top:1px solid rgba(255,212,0,0.15);
 }
 
 .footer-links{
-  margin-bottom:15px;
+  margin-bottom:16px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px 0;
 }
 
 .footer-links a{
-  color:#FFD400;
+  color:var(--yellow);
   text-decoration:none;
-  font-size:14px;
-  margin:0 6px;
+  font-size:13px;
+  padding:0 8px;
+  transition:opacity 0.3s ease;
 }
 
 .footer-links a:hover{
-  text-decoration:underline;
+  opacity:0.8;
 }
 
 .footer-links span{
   color:#555;
-  font-size:14px;
+  font-size:13px;
 }
 
 .footer-copy{
   color:#777;
-  font-size:13px;
+  font-size:12px;
+  line-height:1.6;
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* TABLET+ BREAKPOINTS */
+@media (min-width: 640px){
+  header{
+    padding:24px 40px;
+  }
+  
+  .logo{
+    font-size:28px;
+  }
+  
+  .header-btn{
+    padding:12px 26px;
+    font-size:15px;
+  }
+  
+  .hero{
+    padding:60px 40px 80px;
+  }
+  
+  .section{
+    padding:80px 40px;
+  }
+  
+  .courses{
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+    max-width:700px;
+  }
+  
+  .proof-grid{
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+    max-width:700px;
+  }
+  
+  .course-card{
+    font-size:17px;
+    padding:28px;
+  }
+}
+
+@media (min-width: 1024px){
+  header{
+    padding:30px 60px;
+  }
+  
+  .hero{
+    padding:80px 60px 120px;
+    text-align:left;
+  }
+  
+  .hero p{
+    margin-left:0;
+  }
+  
+  .section{
+    padding:100px 60px;
+  }
+  
+  .courses{
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+    max-width:1100px;
+  }
+  
+  .proof-grid{
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+    max-width:1100px;
+  }
+  
+  .course-card{
+    font-size:18px;
+    padding:32px;
+  }
+  
+  .price-box{
+    padding:50px 40px;
+  }
 }
 </style>
 </head>
@@ -222,8 +426,8 @@ header{
 </header>
 
 <section class="hero">
-  <h1>Learn High-Income Skills<br><span>Build Your Digital Empire</span></h1>
-  <p>Premium money-making courses designed for ambitious youngsters.</p>
+  <h1>Learn High-Income Skills<span>Build Your Digital Empire</span></h1>
+  <p>Premium money-making courses designed for ambitious youngsters ready to transform their financial future.</p>
   <button class="outline-btn" onclick="scrollToPricing()">BUY NOW</button>
 </section>
 
@@ -231,8 +435,7 @@ header{
   <h2>Our Premium Courses</h2>
   <div class="courses">
     <div class="course-card">AI Automation Business</div>
-    <div class="course-card">Crypto Business Master Course
-</div>
+    <div class="course-card">Crypto Business Master Course</div>
     <div class="course-card">Discipline Not Destiny</div>
     <div class="course-card">Affiliate Marketing</div>
     <div class="course-card">Full Export Business Course</div>
@@ -254,7 +457,7 @@ header{
 
 <section class="section" id="pricing">
   <h2>Start Your Success Journey Today</h2>
-  <p style="color:var(--muted);margin-bottom:30px;">
+  <p style="color:var(--muted);margin-bottom:32px;font-size:15px;">
     Instant access to all premium courses
   </p>
 
@@ -354,7 +557,7 @@ function buyNow(){
     currency: "INR",
     name: "Money Mastery Academy",
     description: "All Courses Bundle",
-    payment_capture: 1,  // CRITICAL: 1 = auto-capture, 0 = manual capture
+    payment_capture: 1,
     notes:{
       referral_code: referral,
       final_amount: payableAmount
