@@ -657,21 +657,54 @@ header{
 
 <script>
 // ========================================
-// CONFIGURATION - REPLACE WITH YOUR ACTUAL URLs
+// CONFIGURATION
 // ========================================
 const REFERRAL_API = "https://script.google.com/macros/s/AKfycbzevRG8-APfPZKgTSXzI4af_JKnLCE9aVOTHVVYDaaxMwlmLnAxA0-fL6W_G2jdBVFX/exec";
-const PAYMENT_LOG_API = "https://script.google.com/macros/s/AKfycbzevRG8-APfPZKgTSXzI4af_JKnLCE9aVOTHVVYDaaxMwlmLnAxA0-fL6W_G2jdBVFX/exec"; // Same URL as above
+const PAYMENT_LOG_API = "https://script.google.com/macros/s/AKfycbzevRG8-APfPZKgTSXzI4af_JKnLCE9aVOTHVVYDaaxMwlmLnAxA0-fL6W_G2jdBVFX/exec";
+const ANALYTICS_API = "https://script.google.com/macros/s/AKfycbzevRG8-APfPZKgTSXzI4af_JKnLCE9aVOTHVVYDaaxMwlmLnAxA0-fL6W_G2jdBVFX/exec";
 
 let referralStatus = "EMPTY";
 let payableAmount = 1800; // in paise (₹18)
 let typingTimer;
 
+// ========================================
+// UTILITY FUNCTIONS
+// ========================================
 function scrollToPricing(){
   document.getElementById("pricing").scrollIntoView({behavior:"smooth"});
 }
 
-// Auto-fill referral code from URL
+// ========================================
+// ANALYTICS TRACKING
+// ========================================
+async function trackEvent(eventType) {
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const refParam = urlParams.get('ref') || '';
+    
+    await fetch(ANALYTICS_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'trackAnalytics',
+        eventType: eventType,
+        referralCode: refParam,
+        userAgent: navigator.userAgent
+      })
+    });
+  } catch (error) {
+    console.log('Analytics tracking:', error);
+  }
+}
+
+// ========================================
+// PAGE LOAD EVENTS
+// ========================================
 window.addEventListener('load', function() {
+  // Track page view
+  trackEvent('page_view');
+  
+  // Auto-fill referral code from URL
   const urlParams = new URLSearchParams(window.location.search);
   const refParam = urlParams.get('ref');
   
@@ -679,8 +712,19 @@ window.addEventListener('load', function() {
     document.getElementById("refCode").value = refParam.toUpperCase();
     validateReferral();
   }
+  
+  // Track partner button clicks
+  const partnerBtn = document.querySelector('.header-btn');
+  if (partnerBtn) {
+    partnerBtn.addEventListener('click', function() {
+      trackEvent('partner_click');
+    });
+  }
 });
 
+// ========================================
+// REFERRAL CODE VALIDATION
+// ========================================
 function handleReferralChange(){
   clearTimeout(typingTimer);
   typingTimer = setTimeout(validateReferral, 600);
@@ -716,7 +760,13 @@ function validateReferral(){
     });
 }
 
+// ========================================
+// PAYMENT FUNCTIONS
+// ========================================
 function buyNow(){
+  // Track buy click
+  trackEvent('buy_click');
+  
   if(referralStatus === "INVALID"){
     alert("Invalid referral code. Remove it or enter a valid one.");
     return;
@@ -802,51 +852,6 @@ async function logPayment(paymentId, amount, referralCode) {
     throw error;
   }
 }
-// ========================================
-// ANALYTICS TRACKING
-// ========================================
-const ANALYTICS_API = "https://script.google.com/macros/s/YOUR_ACTUAL_SCRIPT_ID/exec";
-
-// Track page view on load
-window.addEventListener('load', function() {
-  trackEvent('page_view');
-});
-
-// Track partner button clicks  
-const partnerBtn = document.querySelector('.header-btn');
-if (partnerBtn) {
-  partnerBtn.addEventListener('click', function() {
-    trackEvent('partner_click');
-  });
-}
-
-async function trackEvent(eventType) {
-  try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const refParam = urlParams.get('ref') || '';
-    
-    await fetch(ANALYTICS_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: 'trackAnalytics',
-        eventType: eventType,
-        referralCode: refParam,
-        userAgent: navigator.userAgent
-      })
-    });
-  } catch (error) {
-    console.log('Analytics:', error);
-  }
-}
-
-// Track buy clicks in buyNow() function
-// Add this at the START of the buyNow() function (around line 700):
-function buyNow(){
-  trackEvent('buy_click'); // ADD THIS LINE
-  
-  if(referralStatus === "INVALID"){
-    // ... rest of existing code
 </script>
 
 </body>
