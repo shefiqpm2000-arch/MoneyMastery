@@ -355,6 +355,11 @@ header{
   box-shadow:0 12px 24px rgba(255,212,0,0.4);
 }
 
+.buy-btn:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
 /* FOOTER */
 .site-footer{
   background:#0b0b0f;
@@ -364,10 +369,10 @@ header{
 }
 
 .footer-links{
-  margin-bottom:16px;
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
+  margin-bottom:16px;
   gap:8px 0;
 }
 
@@ -620,7 +625,7 @@ header{
       placeholder="Enter Referral Code (Optional)"
       oninput="handleReferralChange()">
 
-    <button class="buy-btn" onclick="buyNow()">BUY NOW</button>
+    <button class="buy-btn" id="buyButton" onclick="buyNow()">BUY NOW</button>
    
    <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-top:20px;">
     This is a <strong style="color:var(--text)">digital product</strong>. No physical item will be shipped. After successful payment, you will get instant access to the product download page to download all files. Please ensure you download all PDFs before leaving the download page.
@@ -651,16 +656,30 @@ header{
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
-const REFERRAL_API =
-"https://script.google.com/macros/s/AKfycbzAHVxq76EjLwd9LYNlvoVWkLx1TPn3T5aY3Ca8gtUGkKXv3ZVATZee2uoOEEDtB3ve/exec";
+// ========================================
+// CONFIGURATION - REPLACE WITH YOUR ACTUAL URLs
+// ========================================
+const REFERRAL_API = "https://script.google.com/macros/s/AKfycbzevRG8-APfPZKgTSXzI4af_JKnLCE9aVOTHVVYDaaxMwlmLnAxA0-fL6W_G2jdBVFX/exec";
+const PAYMENT_LOG_API = "https://script.google.com/macros/s/AKfycbzevRG8-APfPZKgTSXzI4af_JKnLCE9aVOTHVVYDaaxMwlmLnAxA0-fL6W_G2jdBVFX/exec"; // Same URL as above
 
 let referralStatus = "EMPTY";
-let payableAmount = 1800;
+let payableAmount = 1800; // in paise (₹18)
 let typingTimer;
 
 function scrollToPricing(){
   document.getElementById("pricing").scrollIntoView({behavior:"smooth"});
 }
+
+// Auto-fill referral code from URL
+window.addEventListener('load', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const refParam = urlParams.get('ref');
+  
+  if (refParam) {
+    document.getElementById("refCode").value = refParam.toUpperCase();
+    validateReferral();
+  }
+});
 
 function handleReferralChange(){
   clearTimeout(typingTimer);
@@ -668,12 +687,12 @@ function handleReferralChange(){
 }
 
 function validateReferral(){
-  const code = document.getElementById("refCode").value.trim();
+  const code = document.getElementById("refCode").value.trim().toUpperCase();
   const priceEl = document.getElementById("priceText");
 
   if(code === ""){
     referralStatus = "EMPTY";
-    payableAmount = 1800;
+    payableAmount = 1800; // ₹18
     priceEl.innerHTML = "₹18 ONLY";
     return;
   }
@@ -683,13 +702,13 @@ function validateReferral(){
     .then(result => {
       if(result === "VALID"){
         referralStatus = "VALID";
-        payableAmount = 1400;
+        payableAmount = 1400; // ₹14
         priceEl.innerHTML =
-          "₹14 <span style='font-size:14px;color:#00ff66'>(Referral Applied)</span>";
+          "₹14 <span style='font-size:14px;color:#00ff66'>(Referral Applied ✓)</span>";
       } else {
         referralStatus = "INVALID";
         payableAmount = 1800;
-        priceEl.innerHTML = "₹18 ONLY";
+        priceEl.innerHTML = "₹18 ONLY <span style='font-size:12px;color:#ff4444'>(Invalid code)</span>";
       }
     })
     .catch(() => {
@@ -703,29 +722,131 @@ function buyNow(){
     return;
   }
 
-  const referral =
-    document.getElementById("refCode").value.trim() || "NO-REFERRAL";
+  const referralCode = document.getElementById("refCode").value.trim().toUpperCase() || "NO-REFERRAL";
+  const buyBtn = document.getElementById("buyButton");
+  
+  // Disable button during payment
+  buyBtn.disabled = true;
+  buyBtn.textContent = "Processing...";
 
   const options = {
-    key: "rzp_live_RueFKopFjNKDKo",
+    key: "rzp_live_RueFKopFjNKDKo", // Your Razorpay Live Key
     amount: payableAmount,
     currency: "INR",
     name: "MoneyMastery.in",
     description: "GET INSTANT ACCESS",
+    image: "https://moneymastery.in/logo.png", // Optional: Add your logo
     payment_capture: 1,
     notes:{
-      referral_code: referral,
+      referral_code: referralCode,
       final_amount: payableAmount
     },
     handler: function (response) {
-      console.log("Payment ID:", response.razorpay_payment_id);
-      window.location.href = "success.html";
+      console.log("Payment Success:", response.razorpay_payment_id);
+      
+      // Log payment to Google Sheets
+      logPayment(response.razorpay_payment_id, payableAmount, referralCode)
+        .then(() => {
+          // Redirect to success page
+          window.location.href = "success.html";
+        })
+        .catch(error => {
+          console.error("Payment logging failed:", error);
+          // Still redirect even if logging fails
+          window.location.href = "success.html";
+        });
+    },
+    modal: {
+      ondismiss: function() {
+        // Re-enable button if user closes payment modal
+        buyBtn.disabled = false;
+        buyBtn.textContent = "BUY NOW";
+      }
+    },
+    theme: {
+      color: "#FFD400"
     }
   };
 
   const rzp = new Razorpay(options);
+  
+  rzp.on('payment.failed', function (response){
+    alert('Payment failed: ' + response.error.description);
+    buyBtn.disabled = false;
+    buyBtn.textContent = "BUY NOW";
+  });
+  
   rzp.open();
 }
+
+// Log payment to Google Sheets
+async function logPayment(paymentId, amount, referralCode) {
+  try {
+    const response = await fetch(PAYMENT_LOG_API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        payment_id: paymentId,
+        amount: amount,
+        referral_code: referralCode,
+        timestamp: new Date().toISOString()
+      })
+    });
+    
+    console.log('Payment logged successfully');
+    return response;
+  } catch (error) {
+    console.error('Error logging payment:', error);
+    throw error;
+  }
+}
+// ========================================
+// ANALYTICS TRACKING
+// ========================================
+const ANALYTICS_API = "https://script.google.com/macros/s/YOUR_ACTUAL_SCRIPT_ID/exec";
+
+// Track page view on load
+window.addEventListener('load', function() {
+  trackEvent('page_view');
+});
+
+// Track partner button clicks  
+const partnerBtn = document.querySelector('.header-btn');
+if (partnerBtn) {
+  partnerBtn.addEventListener('click', function() {
+    trackEvent('partner_click');
+  });
+}
+
+async function trackEvent(eventType) {
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const refParam = urlParams.get('ref') || '';
+    
+    await fetch(ANALYTICS_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'trackAnalytics',
+        eventType: eventType,
+        referralCode: refParam,
+        userAgent: navigator.userAgent
+      })
+    });
+  } catch (error) {
+    console.log('Analytics:', error);
+  }
+}
+
+// Track buy clicks in buyNow() function
+// Add this at the START of the buyNow() function (around line 700):
+function buyNow(){
+  trackEvent('buy_click'); // ADD THIS LINE
+  
+  if(referralStatus === "INVALID"){
+    // ... rest of existing code
 </script>
 
 </body>
