@@ -928,7 +928,7 @@ document.getElementById("applyBtn").onclick = () => {
 };
 
 // ========================================
-// OTP SENDING
+// OTP SENDING - FIXED VERSION
 // ========================================
 async function sendOTP() {
   const email = document.getElementById('partner-email').value.trim();
@@ -950,39 +950,47 @@ async function sendOTP() {
   messageDiv.innerHTML = '';
   
   try {
+    // Create form data
+    const formData = new FormData();
+    formData.append('action', 'sendOTP');
+    formData.append('email', email);
+    
     const response = await fetch(API_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: 'sendOTP',
-        email: email
-      })
+      body: formData
     });
     
-    // Since we're using no-cors, we'll assume success
-    currentEmail = email;
-    document.getElementById('email-display').textContent = email;
+    const data = await response.json();
     
-    // Switch to OTP step
-    document.getElementById('email-step').style.display = 'none';
-    document.getElementById('otp-step').style.display = 'block';
+    console.log('OTP Response:', data); // For debugging
     
-    showMessage(document.getElementById('otp-message'), 
-      'OTP sent successfully! Check your email.', 'success');
-    
-    // Focus first OTP input
-    document.querySelector('.otp-digit').focus();
+    if (data.success) {
+      currentEmail = email;
+      document.getElementById('email-display').textContent = email;
+      
+      // Switch to OTP step
+      document.getElementById('email-step').style.display = 'none';
+      document.getElementById('otp-step').style.display = 'block';
+      
+      showMessage(document.getElementById('otp-message'), 
+        data.message || 'OTP sent successfully! Check your email.', 'success');
+      
+      // Focus first OTP input
+      document.querySelector('.otp-digit').focus();
+    } else {
+      showMessage(messageDiv, data.message || 'Failed to send OTP. Please try again.', 'error');
+    }
     
   } catch (error) {
-    showMessage(messageDiv, 'Failed to send OTP. Please try again.', 'error');
+    console.error('Send OTP error:', error);
+    showMessage(messageDiv, 'Network error. Please check your connection and try again.', 'error');
   } finally {
     btnText.textContent = 'Send OTP';
   }
 }
 
 // ========================================
-// OTP VERIFICATION
+// OTP VERIFICATION - FIXED VERSION
 // ========================================
 async function verifyOTP() {
   const otpInputs = document.querySelectorAll('.otp-digit');
@@ -1000,19 +1008,21 @@ async function verifyOTP() {
   messageDiv.innerHTML = '';
   
   try {
+    const formData = new FormData();
+    formData.append('action', 'verifyOTP');
+    formData.append('email', currentEmail);
+    formData.append('otp', otp);
+    
     const response = await fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        action: 'verifyOTP',
-        email: currentEmail,
-        otp: otp
-      })
+      body: formData
     });
     
     const data = await response.json();
     
-    if (data.status === 'success') {
+    console.log('Verify Response:', data); // For debugging
+    
+    if (data.success) {
       sessionToken = data.sessionToken;
       localStorage.setItem('partnerSession', sessionToken);
       localStorage.setItem('partnerEmail', currentEmail);
@@ -1027,6 +1037,7 @@ async function verifyOTP() {
     }
     
   } catch (error) {
+    console.error('Verify OTP error:', error);
     showMessage(messageDiv, 'Verification failed. Please try again.', 'error');
   } finally {
     btnText.textContent = 'Verify & Login';
@@ -1034,7 +1045,7 @@ async function verifyOTP() {
 }
 
 // ========================================
-// DASHBOARD LOADING
+// DASHBOARD LOADING - FIXED VERSION
 // ========================================
 async function loadDashboard() {
   // Hide auth forms
@@ -1049,18 +1060,20 @@ async function loadDashboard() {
   document.getElementById('dashboard-email').textContent = currentEmail;
   
   try {
+    const formData = new FormData();
+    formData.append('action', 'getDashboard');
+    formData.append('sessionToken', sessionToken);
+    
     const response = await fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        action: 'getDashboard',
-        sessionToken: sessionToken
-      })
+      body: formData
     });
     
     const data = await response.json();
     
-    if (data.status === 'success') {
+    console.log('Dashboard Data:', data); // For debugging
+    
+    if (data.success) {
       // Update stats
       document.getElementById('total-referrals').textContent = data.totalReferrals || 0;
       document.getElementById('successful-purchases').textContent = data.successfulPurchases || 0;
@@ -1070,13 +1083,14 @@ async function loadDashboard() {
       // Update referrals table
       updateReferralsTable(data.referrals || []);
     } else {
-      alert('Failed to load dashboard data');
+      alert('Failed to load dashboard data: ' + (data.message || 'Unknown error'));
       logout();
     }
     
   } catch (error) {
     console.error('Dashboard load error:', error);
-    alert('Failed to load dashboard');
+    alert('Failed to load dashboard. Please try logging in again.');
+    logout();
   }
 }
 
