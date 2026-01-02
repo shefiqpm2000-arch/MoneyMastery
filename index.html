@@ -300,110 +300,111 @@ header{
 }
 
 .original-price{
-  color:var(--muted);
+  font-size:16px;
   text-decoration:line-through;
-  font-size:14px;
-  margin-bottom:8px;
+  color:var(--muted);
+  margin-bottom:4px;
 }
 
 .price{
   font-family:'Bebas Neue',sans-serif;
-  font-size:48px;
+  font-size:42px;
   color:var(--yellow);
-  margin:12px 0 24px;
+  margin-bottom:20px;
   letter-spacing:1px;
 }
 
 .ref-input{
   width:100%;
-  padding:14px 16px;
+  padding:14px 18px;
   border-radius:12px;
-  border:1px solid rgba(255,212,0,0.2);
-  margin-bottom:16px;
-  text-align:center;
-  background:rgba(255,255,255,0.05);
-  color:var(--text);
-  font-family:'Sora',sans-serif;
+  border:1px solid rgba(255,212,0,0.3);
+  background:#0f0f14;
+  color:#fff;
   font-size:14px;
-}
-
-.ref-input::placeholder{
-  color:var(--muted);
+  margin-bottom:16px;
+  transition:all 0.3s ease;
+  font-family:'Sora',sans-serif;
+  text-align:center;
+  text-transform:uppercase;
 }
 
 .ref-input:focus{
   outline:none;
   border-color:var(--yellow);
+  box-shadow:0 0 0 3px rgba(255,212,0,0.1);
+}
+
+.ref-input::placeholder{
+  color:var(--muted);
+  text-transform:none;
 }
 
 .buy-btn{
   width:100%;
   background:var(--yellow);
+  color:#0b0b0f;
   border:none;
   padding:16px;
-  border-radius:12px;
+  border-radius:50px;
   font-size:16px;
   font-weight:700;
   cursor:pointer;
-  color:#0b0b0f;
-  font-family:'Sora',sans-serif;
   transition:all 0.3s ease;
+  font-family:'Sora',sans-serif;
 }
 
 .buy-btn:hover{
   transform:translateY(-2px);
-  box-shadow:0 12px 24px rgba(255,212,0,0.4);
+  box-shadow:0 12px 32px rgba(255,212,0,0.4);
 }
 
 .buy-btn:disabled{
   opacity:0.6;
   cursor:not-allowed;
+  transform:none;
 }
 
 /* FOOTER */
 .site-footer{
-  background:#0b0b0f;
-  padding:32px 24px;
+  padding:40px 24px 24px;
   text-align:center;
-  border-top:1px solid rgba(255,212,0,0.15);
+  border-top:1px solid rgba(255,212,0,0.1);
+  margin-top:80px;
 }
 
 .footer-links{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  margin-bottom:16px;
-  gap:8px 0;
+  gap:8px 16px;
+  margin-bottom:20px;
+  font-size:13px;
 }
 
 .footer-links a{
-  color:var(--yellow);
+  color:var(--muted);
   text-decoration:none;
-  font-size:13px;
-  padding:0 8px;
-  transition:opacity 0.3s ease;
+  transition:color 0.3s ease;
 }
 
 .footer-links a:hover{
-  opacity:0.8;
+  color:var(--yellow);
 }
 
 .footer-links span{
-  color:#555;
-  font-size:13px;
+  color:rgba(255,212,0,0.2);
 }
 
 .footer-copy{
-  color:#777;
-  font-size:12px;
-  line-height:1.6;
+  color:var(--muted);
+  font-size:13px;
 }
 
-/* ANIMATIONS */
 @keyframes fadeInUp{
   from{
     opacity:0;
-    transform:translateY(30px);
+    transform:translateY(20px);
   }
   to{
     opacity:1;
@@ -411,126 +412,18 @@ header{
   }
 }
 
-/* TABLET+ BREAKPOINTS */
-@media (min-width: 640px){
+@media (max-width:480px){
   header{
-    padding:24px 40px;
+    padding:16px 20px;
   }
   
   .logo{
-    font-size:28px;
+    font-size:20px;
   }
   
   .header-btn{
-    padding:12px 26px;
-    font-size:15px;
-  }
-  
-  .hero{
-    padding:60px 40px 80px;
-  }
-  
-  .section{
-    padding:80px 40px;
-  }
-  
-  .flowchart{
-    max-width:800px;
-  }
-  
-  .flow-number{
-    width:72px;
-    height:72px;
-    font-size:36px;
-  }
-  
-  .flow-content h3{
-    font-size:26px;
-  }
-  
-  .flow-content p{
-    font-size:16px;
-  }
-  
-  .courses{
-    grid-template-columns:repeat(2, 1fr);
-    gap:20px;
-    max-width:700px;
-  }
-  
-  .proof-grid{
-    grid-template-columns:repeat(2, 1fr);
-    gap:20px;
-    max-width:700px;
-  }
-  
-  .course-card{
-    font-size:17px;
-    padding:28px;
-  }
-}
-
-@media (min-width: 1024px){
-  header{
-    padding:30px 60px;
-  }
-  
-  .hero{
-    padding:80px 60px 120px;
-    text-align:left;
-  }
-  
-  .hero p{
-    margin-left:0;
-  }
-  
-  .section{
-    padding:100px 60px;
-  }
-  
-  .flowchart{
-    max-width:1000px;
-    grid-template-columns:repeat(2, 1fr);
-    gap:28px;
-  }
-  
-  .flow-item{
-    padding:40px 32px;
-  }
-  
-  .flow-number{
-    width:80px;
-    height:80px;
-    font-size:40px;
-  }
-  
-  .flow-content h3{
-    font-size:28px;
-  }
-  
-  .flow-content p{
-    font-size:16px;
-  }
-  
-  .courses{
-    grid-template-columns:repeat(3, 1fr);
-    gap:24px;
-    max-width:1100px;
-  }
-  
-  .proof-grid{
-    grid-template-columns:repeat(3, 1fr);
-    gap:24px;
-    max-width:1100px;
-  }
-  
-  .course-card{
-    font-size:18px;
-    padding:32px;
-  }
-  
-  .price-box{
-    padding:50px 40px;
+    padding:8px 16px;
+    font-size:13px;
   }
 }
 </style>
@@ -539,16 +432,19 @@ header{
 <body>
 
 <header>
-  <div class="logo">Money<span>Mastery</span></div>
-  <button class="header-btn" onclick="location.href='be-a-partner.html'">
-    Be a Partner
-  </button>
+  <div class="logo">MONEY<span>MASTERY</span></div>
+  <button class="header-btn" onclick="window.location.href='be-a-partner.html'">BE A PARTNER</button>
 </header>
 
 <section class="hero">
-  <h1>Learn High-Income Skills<span>Build Your Digital Empire</span></h1>
-  <p>Premium money-making courses designed for ambitious youngsters ready to transform their financial future.</p>
-  <button class="outline-btn" onclick="scrollToPricing()">BUY NOW</button>
+  <h1>
+    LEARN HIGH-INCOME SKILLS
+    <span>BUILD YOUR DIGITAL EMPIRE</span>
+  </h1>
+  <p>
+    Master proven business strategies and transform your financial future with our premium digital courses.
+  </p>
+  <button class="outline-btn" onclick="scrollToPricing()">GET STARTED NOW</button>
 </section>
 
 <section class="section">
@@ -659,12 +555,10 @@ header{
 // ========================================
 // CONFIGURATION
 // ========================================
-const REFERRAL_API = "https://script.google.com/macros/s/AKfycbw4GpaM-PpH2z6DoG41y6ZCvy820KJWdUHiYytHNvOcNGIZsKazbUlkM-kQbmIlBxPD/exec";
-const PAYMENT_LOG_API = "https://script.google.com/macros/s/AKfycbw4GpaM-PpH2z6DoG41y6ZCvy820KJWdUHiYytHNvOcNGIZsKazbUlkM-kQbmIlBxPD/exec";
-const ANALYTICS_API = "https://script.google.com/macros/s/AKfycbw4GpaM-PpH2z6DoG41y6ZCvy820KJWdUHiYytHNvOcNGIZsKazbUlkM-kQbmIlBxPD/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx6aKfq8WVe8iTk9H4gWp7hiD54WZoQ475vacMq69F5BO9392cvSnA2qrUVMOvYDAJPpg/exec";
 
 let referralStatus = "EMPTY";
-let payableAmount = 1800; // in paise (₹18)
+let payableAmount = 1800;
 let typingTimer;
 
 // ========================================
@@ -675,50 +569,15 @@ function scrollToPricing(){
 }
 
 // ========================================
-// ANALYTICS TRACKING
-// ========================================
-async function trackEvent(eventType) {
-  try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const refParam = urlParams.get('ref') || '';
-    
-    await fetch(ANALYTICS_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: 'trackAnalytics',
-        eventType: eventType,
-        referralCode: refParam,
-        userAgent: navigator.userAgent
-      })
-    });
-  } catch (error) {
-    console.log('Analytics tracking:', error);
-  }
-}
-
-// ========================================
 // PAGE LOAD EVENTS
 // ========================================
 window.addEventListener('load', function() {
-  // Track page view
-  trackEvent('page_view');
-  
-  // Auto-fill referral code from URL
   const urlParams = new URLSearchParams(window.location.search);
   const refParam = urlParams.get('ref');
   
   if (refParam) {
     document.getElementById("refCode").value = refParam.toUpperCase();
     validateReferral();
-  }
-  
-  // Track partner button clicks
-  const partnerBtn = document.querySelector('.header-btn');
-  if (partnerBtn) {
-    partnerBtn.addEventListener('click', function() {
-      trackEvent('partner_click');
-    });
   }
 });
 
@@ -736,17 +595,17 @@ function validateReferral(){
 
   if(code === ""){
     referralStatus = "EMPTY";
-    payableAmount = 1800; // ₹18
+    payableAmount = 1800;
     priceEl.innerHTML = "₹18 ONLY";
     return;
   }
 
-  fetch(`${REFERRAL_API}?code=${encodeURIComponent(code)}`)
+  fetch(`${WEB_APP_URL}?code=${encodeURIComponent(code)}`)
     .then(res => res.text())
     .then(result => {
       if(result === "VALID"){
         referralStatus = "VALID";
-        payableAmount = 1400; // ₹14
+        payableAmount = 1400;
         priceEl.innerHTML =
           "₹14 <span style='font-size:14px;color:#00ff66'>(Referral Applied ✓)</span>";
       } else {
@@ -764,9 +623,6 @@ function validateReferral(){
 // PAYMENT FUNCTIONS
 // ========================================
 function buyNow(){
-  // Track buy click
-  trackEvent('buy_click');
-  
   if(referralStatus === "INVALID"){
     alert("Invalid referral code. Remove it or enter a valid one.");
     return;
@@ -775,17 +631,16 @@ function buyNow(){
   const referralCode = document.getElementById("refCode").value.trim().toUpperCase() || "NO-REFERRAL";
   const buyBtn = document.getElementById("buyButton");
   
-  // Disable button during payment
   buyBtn.disabled = true;
   buyBtn.textContent = "Processing...";
 
   const options = {
-    key: "rzp_live_RueFKopFjNKDKo", // Your Razorpay Live Key
+    key: "rzp_live_RueFKopFjNKDKo",
     amount: payableAmount,
     currency: "INR",
     name: "MoneyMastery.in",
     description: "GET INSTANT ACCESS",
-    image: "https://moneymastery.in/logo.png", // Optional: Add your logo
+    image: "https://moneymastery.in/logo.png",
     payment_capture: 1,
     notes:{
       referral_code: referralCode,
@@ -794,21 +649,17 @@ function buyNow(){
     handler: function (response) {
       console.log("Payment Success:", response.razorpay_payment_id);
       
-      // Log payment to Google Sheets
       logPayment(response.razorpay_payment_id, payableAmount, referralCode)
         .then(() => {
-          // Redirect to success page
           window.location.href = "success.html";
         })
         .catch(error => {
           console.error("Payment logging failed:", error);
-          // Still redirect even if logging fails
           window.location.href = "success.html";
         });
     },
     modal: {
       ondismiss: function() {
-        // Re-enable button if user closes payment modal
         buyBtn.disabled = false;
         buyBtn.textContent = "BUY NOW";
       }
@@ -829,15 +680,15 @@ function buyNow(){
   rzp.open();
 }
 
-// Log payment to Google Sheets
 async function logPayment(paymentId, amount, referralCode) {
   try {
-    const response = await fetch(PAYMENT_LOG_API, {
+    const response = await fetch(WEB_APP_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        action: 'logPayment',
         payment_id: paymentId,
         amount: amount,
         referral_code: referralCode,
