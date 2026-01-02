@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Be a Partner – Money Mastery</title>
 
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -17,8 +16,6 @@
   --card: #14141c;
   --text: #ffffff;
   --muted: #b5b5b5;
-  --success: #10b981;
-  --error: #ef4444;
 }
 
 * {
@@ -34,7 +31,6 @@ body {
   min-height: 100vh;
 }
 
-/* HEADER */
 header {
   padding: 30px 60px;
   border-bottom: 1px solid rgba(255,212,0,0.1);
@@ -50,14 +46,12 @@ header {
   color: var(--yellow);
 }
 
-/* CONTAINER */
 .container {
   max-width: 1200px;
   margin: auto;
   padding: 60px 20px;
 }
 
-/* HERO */
 .hero {
   text-align: center;
   margin-bottom: 80px;
@@ -83,139 +77,131 @@ header {
   line-height: 1.6;
 }
 
-/* TABS */
-.tabs {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-bottom: 60px;
-  flex-wrap: wrap;
+.info-section {
+  max-width: 900px;
+  margin: 0 auto 60px;
 }
 
-.tab-btn {
-  background: transparent;
-  border: 2px solid rgba(255,212,0,0.3);
-  color: var(--muted);
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Archivo', sans-serif;
-}
-
-.tab-btn.active {
-  background: var(--yellow);
-  color: #000;
-  border-color: var(--yellow);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255,212,0,0.3);
-}
-
-.tab-btn:hover:not(.active) {
-  border-color: var(--yellow);
-  color: var(--yellow);
-}
-
-/* TAB CONTENT */
-.tab-content {
-  display: none;
-  animation: fadeIn 0.4s ease;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* AUTH BOX */
-.auth-box {
+.info-card {
   background: linear-gradient(135deg, #1a1a24, #14141c);
-  border: 1px solid rgba(255,212,0,0.15);
+  border: 2px solid rgba(255,212,0,0.2);
   padding: 40px;
   border-radius: 24px;
-  max-width: 480px;
-  margin: 0 auto 60px;
+  margin-bottom: 32px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
 }
 
-.auth-box h2 {
-  margin-bottom: 10px;
-  font-weight: 700;
-  font-size: 28px;
+.info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--yellow), #ffa500);
 }
 
-.auth-box .subtitle {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 30px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  font-size: 14px;
+.info-card h2 {
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 24px;
   color: var(--yellow);
+  letter-spacing: -0.5px;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: #0f0f14;
-  color: #fff;
-  font-size: 15px;
-  font-family: 'JetBrains Mono', monospace;
-  transition: all 0.2s ease;
+.info-card p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 16px;
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: var(--yellow);
-  box-shadow: 0 0 0 3px rgba(255,212,0,0.1);
+.info-card ul {
+  list-style: none;
+  margin-top: 24px;
 }
 
-.otp-inputs {
+.info-card ul li {
+  color: var(--text);
+  font-size: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   display: flex;
+  align-items: center;
   gap: 12px;
-  justify-content: center;
 }
 
-.otp-inputs input {
-  width: 56px;
-  height: 56px;
+.info-card ul li:last-child {
+  border-bottom: none;
+}
+
+.info-card ul li::before {
+  content: '✓';
+  color: var(--yellow);
+  font-weight: 900;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.highlight-box {
+  background: rgba(255,212,0,0.1);
+  border: 2px solid var(--yellow);
+  padding: 24px;
+  border-radius: 16px;
+  margin: 32px 0;
   text-align: center;
-  font-size: 24px;
-  font-weight: 700;
-  padding: 0;
-  font-family: 'JetBrains Mono', monospace;
+}
+
+.highlight-box .big-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  color: var(--yellow);
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.highlight-box p {
+  font-size: 16px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.cta-section {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.cta-section h2 {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.cta-section p {
+  color: var(--muted);
+  font-size: 16px;
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn-primary {
-  width: 100%;
   background: var(--yellow);
   color: #000;
   border: none;
-  padding: 16px;
+  padding: 18px 48px;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Archivo', sans-serif;
-  position: relative;
-  overflow: hidden;
+  display: inline-block;
 }
 
 .btn-primary:hover {
@@ -223,404 +209,26 @@ header {
   box-shadow: 0 12px 32px rgba(255,212,0,0.4);
 }
 
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 2px solid var(--yellow);
-  color: var(--yellow);
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  font-family: 'Archivo', sans-serif;
-}
-
-.btn-secondary:hover {
-  background: var(--yellow);
-  color: #000;
-}
-
-.message {
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-}
-
-.message.success {
-  background: rgba(16,185,129,0.1);
-  border: 1px solid var(--success);
-  color: var(--success);
-}
-
-.message.error {
-  background: rgba(239,68,68,0.1);
-  border: 1px solid var(--error);
-  color: var(--error);
-}
-
-.resend-link {
-  text-align: center;
-  margin-top: 16px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.resend-link button {
-  background: none;
-  border: none;
-  color: var(--yellow);
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: underline;
-  font-family: 'Archivo', sans-serif;
-}
-
-/* DASHBOARD */
-.dashboard {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.dashboard-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.dashboard-header h2 {
-  font-size: 36px;
-  font-weight: 900;
-  margin-bottom: 12px;
-}
-
-.dashboard-header .partner-email {
-  color: var(--yellow);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
-}
-
-.logout-btn {
-  margin-top: 16px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: var(--muted);
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: 'Archivo', sans-serif;
-}
-
-.logout-btn:hover {
-  border-color: var(--error);
-  color: var(--error);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  margin-bottom: 50px;
-}
-
-.stat-card {
-  background: linear-gradient(135deg, #1a1a24, #14141c);
-  border: 1px solid rgba(255,212,0,0.15);
-  padding: 32px;
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--yellow), transparent);
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-}
-
-.stat-label {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.stat-value {
-  font-size: 42px;
-  font-weight: 900;
-  color: var(--yellow);
-  font-family: 'JetBrains Mono', monospace;
-  line-height: 1;
-}
-
-.stat-unit {
-  font-size: 20px;
-  margin-left: 4px;
-}
-
-.referral-code-box {
-  background: linear-gradient(135deg, #14141c, #0f0f14);
-  border: 2px solid var(--yellow);
-  padding: 32px;
-  border-radius: 20px;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.referral-code-box h3 {
-  font-size: 18px;
-  margin-bottom: 16px;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.code-display {
-  background: #0b0b0f;
-  padding: 20px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.code-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--yellow);
-  letter-spacing: 2px;
-}
-
-.copy-btn {
-  background: var(--yellow);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  color: #000;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 13px;
-  transition: all 0.2s ease;
-  font-family: 'Archivo', sans-serif;
-}
-
-.copy-btn:hover {
-  transform: scale(1.05);
-}
-
-.share-instructions {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* REFERRALS TABLE */
-.referrals-section {
-  margin-top: 60px;
-}
-
-.referrals-section h3 {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 24px;
-}
-
-.referrals-table {
-  background: linear-gradient(135deg, #1a1a24, #14141c);
-  border: 1px solid rgba(255,212,0,0.15);
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.table-responsive {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead {
-  background: rgba(255,212,0,0.1);
-}
-
-thead th {
-  padding: 20px;
-  text-align: left;
-  font-weight: 700;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--yellow);
-}
-
-tbody tr {
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: background 0.2s ease;
-}
-
-tbody tr:hover {
-  background: rgba(255,212,0,0.03);
-}
-
-tbody td {
-  padding: 20px;
-  font-size: 14px;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.status-badge {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  font-family: 'Archivo', sans-serif;
-}
-
-.status-badge.success {
-  background: rgba(16,185,129,0.2);
-  color: var(--success);
-}
-
-.status-badge.pending {
-  background: rgba(255,212,0,0.2);
-  color: var(--yellow);
-}
-
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--muted);
-}
-
-.empty-state svg {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 20px;
-  opacity: 0.3;
-}
-
-/* STEPS */
-.steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  margin-bottom: 70px;
-}
-
-.step {
-  background: linear-gradient(135deg, #1a1a24, #14141c);
-  padding: 28px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,212,0,0.15);
-  transition: all 0.3s ease;
-}
-
-.step:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255,212,0,0.3);
-}
-
-.step h3 {
-  color: var(--yellow);
-  margin-bottom: 12px;
-  font-size: 18px;
-}
-
-.step p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* COMMISSION BOX */
-.commission-box {
-  background: linear-gradient(145deg, #14141c, #0f0f14);
-  border: 1px solid rgba(255,212,0,0.2);
-  border-radius: 22px;
-  padding: 45px 30px;
-  margin-bottom: 60px;
-}
-
-.commission-box h2 {
-  text-align: center;
-  font-size: 34px;
-  margin-bottom: 30px;
-  font-weight: 900;
-}
-
-.commission-box h2 span {
-  color: var(--yellow);
-}
-
-.commission-box ul {
-  list-style: none;
-  max-width: 520px;
-  margin: auto;
-  text-align: left;
-}
-
-.commission-box li {
-  font-size: 16px;
-  margin-bottom: 18px;
-  padding-left: 32px;
-  position: relative;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.commission-box li::before {
-  content: "✓";
-  color: var(--yellow);
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-/* FOOTER */
 .site-footer {
+  padding: 40px 24px 24px;
   text-align: center;
-  padding: 40px 20px;
-  background: #0b0b0f;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,212,0,0.1);
   margin-top: 80px;
 }
 
 .footer-links {
-  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  margin-bottom: 20px;
+  font-size: 13px;
 }
 
 .footer-links a {
-  color: #b5b5b5;
+  color: var(--muted);
   text-decoration: none;
-  font-size: 14px;
-  margin: 0 6px;
-  transition: color 0.2s ease;
+  transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
@@ -628,70 +236,33 @@ tbody td {
 }
 
 .footer-links span {
-  color: #444;
+  color: rgba(255,212,0,0.2);
 }
 
-.site-footer p {
+.footer-copy {
+  color: var(--muted);
   font-size: 13px;
-  color: #777;
 }
 
-/* LOADING SPINNER */
-.spinner {
-  border: 3px solid rgba(255,212,0,0.2);
-  border-top: 3px solid var(--yellow);
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-  margin-left: 10px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* RESPONSIVE */
 @media (max-width: 768px) {
   header {
-    padding: 20px;
+    padding: 20px 24px;
   }
-  
-  .hero h1 {
-    font-size: 32px;
+
+  .logo {
+    font-size: 24px;
   }
-  
-  .auth-box {
-    padding: 30px 20px;
+
+  .info-card {
+    padding: 28px 24px;
   }
-  
-  .otp-inputs input {
-    width: 48px;
-    height: 48px;
-    font-size: 20px;
+
+  .info-card h2 {
+    font-size: 28px;
   }
-  
-  .stat-value {
-    font-size: 36px;
-  }
-  
-  .code-display {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .code-text {
-    font-size: 20px;
-  }
-  
-  table {
-    font-size: 12px;
-  }
-  
-  thead th, tbody td {
-    padding: 12px;
+
+  .highlight-box .big-number {
+    font-size: 40px;
   }
 }
 </style>
@@ -700,186 +271,96 @@ tbody td {
 <body>
 
 <header>
-  <div class="logo">Money<span>Mastery</span></div>
+  <div class="logo">MONEY<span>MASTERY</span></div>
 </header>
 
-<section class="container">
+<div class="container">
+  
   <div class="hero">
-    <h1>Become a <span>Partner</span></h1>
+    <h1>
+      Become a Partner
+      <span>& Earn Commission</span>
+    </h1>
     <p>
-      Promote Money Mastery, help people learn high-income skills,
-      and earn rewards for every successful referral.
+      Join our partner program and earn money by referring customers. Simple, transparent, and rewarding.
     </p>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('info')">Program Info</button>
-    <button class="tab-btn" onclick="switchTab('login')">Partner Login</button>
-  </div>
-
-  <!-- TAB: INFO -->
-  <div id="info-tab" class="tab-content active">
-    <div class="steps">
-      <div class="step">
-        <h3>1. Apply</h3>
-        <p>Fill out the partner application form and get approved.</p>
-      </div>
-      <div class="step">
-        <h3>2. Get Your Code</h3>
-        <p>Receive your unique referral code via email.</p>
-      </div>
-      <div class="step">
-        <h3>3. Share</h3>
-        <p>Promote your referral code to your audience.</p>
-      </div>
-      <div class="step">
-        <h3>4. Earn</h3>
-        <p>Get paid for every successful purchase.</p>
-      </div>
-    </div>
-
-    <div class="commission-box">
-      <h2>Commission <span>Structure</span></h2>
+  <div class="info-section">
+    
+    <div class="info-card">
+      <h2>🎯 How It Works</h2>
+      <p>
+        Our partner program is designed to be simple and straightforward. Once approved, you'll receive a unique referral code that you can share with your audience.
+      </p>
       <ul>
-        <li>Earn for every successful purchase made with your code</li>
-        <li><strong>No minimum payout</strong> threshold</li>
-        <li>Payouts processed <strong>weekly</strong></li>
-        <li>Only <strong>successful, non-refunded</strong> payments count</li>
-        <li>Real-time dashboard to track your referrals</li>
+        <li>Apply to become a partner using our simple form</li>
+        <li>Get approved and receive your unique referral code</li>
+        <li>Share your code with friends, family, or your audience</li>
+        <li>Earn commission for every successful purchase</li>
       </ul>
     </div>
 
-    <div style="text-align: center;">
-      <button class="btn-primary" style="max-width: 400px; margin: 0 auto;" id="applyBtn">
-        Apply to Become a Partner
-      </button>
+    <div class="info-card">
+      <h2>💰 Commission Structure</h2>
+      <p>
+        We believe in rewarding our partners generously. Here's how you earn:
+      </p>
+      
+      <div class="highlight-box">
+        <div class="big-number">₹7 per Sale</div>
+        <p>Earn ₹7 commission for every successful purchase using your referral code</p>
+      </div>
+
+      <p style="margin-top: 24px;">
+        When someone uses your referral code, they get the product at a discounted price of ₹14 (instead of ₹18), and you earn ₹7 as commission. It's a win-win!
+      </p>
     </div>
+
+    <div class="info-card">
+      <h2>✅ Requirements</h2>
+      <p>
+        We're looking for partners who are serious about promoting our products. Here's what you need:
+      </p>
+      <ul>
+        <li>Valid email address for communication</li>
+        <li>Active phone number for verification</li>
+        <li>Bank account details for commission payments</li>
+        <li>Commitment to ethical promotion practices</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h2>📋 Application Process</h2>
+      <p>
+        Getting started is easy. Just follow these simple steps:
+      </p>
+      <ul>
+        <li>Click the "Apply Now" button below</li>
+        <li>Fill out the Google Form with your details</li>
+        <li>Submit your application</li>
+        <li>Wait for approval (usually within 24-48 hours)</li>
+        <li>Receive your unique referral code via email</li>
+        <li>Start sharing and earning!</li>
+      </ul>
+    </div>
+
   </div>
 
-  <!-- TAB: LOGIN -->
-  <div id="login-tab" class="tab-content">
-    <!-- EMAIL STEP -->
-    <div id="email-step" class="auth-box">
-      <h2>Partner Login</h2>
-      <p class="subtitle">Enter your registered email to receive a one-time passcode</p>
-      
-      <div id="email-message"></div>
-      
-      <div class="form-group">
-        <label for="partner-email">Email Address</label>
-        <input type="email" id="partner-email" placeholder="your.email@example.com" autocomplete="email">
-      </div>
-      
-      <button class="btn-primary" onclick="sendOTP()">
-        <span id="send-btn-text">Send OTP</span>
-      </button>
-    </div>
-
-    <!-- OTP STEP -->
-    <div id="otp-step" class="auth-box" style="display: none;">
-      <h2>Verify OTP</h2>
-      <p class="subtitle">Enter the 6-digit code sent to <span id="email-display"></span></p>
-      
-      <div id="otp-message"></div>
-      
-      <div class="form-group">
-        <label>One-Time Passcode</label>
-        <div class="otp-inputs">
-          <input type="text" maxlength="1" class="otp-digit" data-index="0" autocomplete="off">
-          <input type="text" maxlength="1" class="otp-digit" data-index="1" autocomplete="off">
-          <input type="text" maxlength="1" class="otp-digit" data-index="2" autocomplete="off">
-          <input type="text" maxlength="1" class="otp-digit" data-index="3" autocomplete="off">
-          <input type="text" maxlength="1" class="otp-digit" data-index="4" autocomplete="off">
-          <input type="text" maxlength="1" class="otp-digit" data-index="5" autocomplete="off">
-        </div>
-      </div>
-      
-      <button class="btn-primary" onclick="verifyOTP()">
-        <span id="verify-btn-text">Verify & Login</span>
-      </button>
-      
-      <div class="resend-link">
-        Didn't receive code? <button onclick="sendOTP()">Resend OTP</button>
-      </div>
-      
-      <div style="text-align: center; margin-top: 16px;">
-        <button class="btn-secondary" onclick="backToEmail()">Change Email</button>
-      </div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div id="dashboard" style="display: none;">
-      <div class="dashboard-header">
-        <h2>Partner Dashboard</h2>
-        <p class="partner-email" id="dashboard-email"></p>
-        <button class="logout-btn" onclick="logout()">Logout</button>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Total Referrals</div>
-          <div class="stat-value" id="total-referrals">0</div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-label">Successful Purchases</div>
-          <div class="stat-value" id="successful-purchases">0</div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-label">Total Earnings</div>
-          <div class="stat-value">
-            <span class="stat-unit">₹</span><span id="total-earnings">0</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="referral-code-box">
-        <h3>Your Referral Code</h3>
-        <div class="code-display">
-          <span class="code-text" id="referral-code">LOADING...</span>
-          <button class="copy-btn" onclick="copyCode()">Copy</button>
-        </div>
-        <p class="share-instructions">
-          Share this code with your audience. They'll enter it during checkout to be counted as your referral.
-        </p>
-      </div>
-
-      <div class="referrals-section">
-        <h3>Recent Referrals</h3>
-        <div class="referrals-table">
-          <div class="table-responsive">
-            <table id="referrals-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>User Email</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Commission</th>
-                </tr>
-              </thead>
-              <tbody id="referrals-tbody">
-                <tr>
-                  <td colspan="5" class="empty-state">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                    </svg>
-                    <p>Loading referrals...</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="cta-section">
+    <h2>Ready to Start Earning?</h2>
+    <p>
+      Apply now and join hundreds of partners who are already earning with us.
+    </p>
+    <button class="btn-primary" onclick="applyNow()">APPLY NOW</button>
   </div>
-</section>
+
+</div>
 
 <footer class="site-footer">
   <div class="footer-links">
+    <a href="index.html">Home</a>
+    <span>|</span>
     <a href="about.html">About Us</a>
     <span>|</span>
     <a href="contact.html">Contact Us</a>
@@ -887,337 +368,19 @@ tbody td {
     <a href="privacy.html">Privacy Policy</a>
     <span>|</span>
     <a href="terms.html">Terms & Conditions</a>
-    <span>|</span>
-    <a href="refund.html">Refund Policy</a>
-    <span>|</span>
-    <a href="disclaimer.html">Disclaimer</a>
   </div>
-  <p>© 2025 MoneyMastery.in. All rights reserved.</p>
+
+  <div class="footer-copy">
+    © 2025 MoneyMastery.in. All rights reserved.
+  </div>
 </footer>
 
 <script>
-// ========================================
-// CONFIGURATION
-// ========================================
-const API_URL = "https://script.google.com/macros/s/AKfycbw4GpaM-PpH2z6DoG41y6ZCvy820KJWdUHiYytHNvOcNGIZsKazbUlkM-kQbmIlBxPD/exec";
+const GOOGLE_FORM_URL = "https://forms.gle/yd67fuephUX2mfz8A";
 
-let currentEmail = "";
-let sessionToken = "";
-
-// ========================================
-// TAB SWITCHING
-// ========================================
-function switchTab(tab) {
-  // Update tab buttons
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-  
-  // Update tab content
-  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-  document.getElementById(`${tab}-tab`).classList.add('active');
+function applyNow() {
+  window.open(GOOGLE_FORM_URL, "_blank");
 }
-
-// ========================================
-// APPLY BUTTON
-// ========================================
-document.getElementById("applyBtn").onclick = () => {
-  window.open(
-    "https://forms.gle/vxWYQ6D3o5pLEWbN8",
-    "_blank"
-  );
-};
-
-// ========================================
-// OTP SENDING - FIXED VERSION
-// ========================================
-async function sendOTP() {
-  const email = document.getElementById('partner-email').value.trim();
-  const messageDiv = document.getElementById('email-message');
-  const btnText = document.getElementById('send-btn-text');
-  
-  if (!email) {
-    showMessage(messageDiv, 'Please enter your email address', 'error');
-    return;
-  }
-  
-  if (!validateEmail(email)) {
-    showMessage(messageDiv, 'Please enter a valid email address', 'error');
-    return;
-  }
-  
-  // Show loading
-  btnText.innerHTML = 'Sending... <span class="spinner"></span>';
-  messageDiv.innerHTML = '';
-  
-  try {
-    // Create form data
-    const formData = new FormData();
-    formData.append('action', 'sendOTP');
-    formData.append('email', email);
-    
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: formData
-    });
-    
-    const data = await response.json();
-    
-    console.log('OTP Response:', data); // For debugging
-    
-    if (data.success) {
-      currentEmail = email;
-      document.getElementById('email-display').textContent = email;
-      
-      // Switch to OTP step
-      document.getElementById('email-step').style.display = 'none';
-      document.getElementById('otp-step').style.display = 'block';
-      
-      showMessage(document.getElementById('otp-message'), 
-        data.message || 'OTP sent successfully! Check your email.', 'success');
-      
-      // Focus first OTP input
-      document.querySelector('.otp-digit').focus();
-    } else {
-      showMessage(messageDiv, data.message || 'Failed to send OTP. Please try again.', 'error');
-    }
-    
-  } catch (error) {
-    console.error('Send OTP error:', error);
-    showMessage(messageDiv, 'Network error. Please check your connection and try again.', 'error');
-  } finally {
-    btnText.textContent = 'Send OTP';
-  }
-}
-
-// ========================================
-// OTP VERIFICATION - FIXED VERSION
-// ========================================
-async function verifyOTP() {
-  const otpInputs = document.querySelectorAll('.otp-digit');
-  const otp = Array.from(otpInputs).map(input => input.value).join('');
-  const messageDiv = document.getElementById('otp-message');
-  const btnText = document.getElementById('verify-btn-text');
-  
-  if (otp.length !== 6) {
-    showMessage(messageDiv, 'Please enter the complete 6-digit OTP', 'error');
-    return;
-  }
-  
-  // Show loading
-  btnText.innerHTML = 'Verifying... <span class="spinner"></span>';
-  messageDiv.innerHTML = '';
-  
-  try {
-    const formData = new FormData();
-    formData.append('action', 'verifyOTP');
-    formData.append('email', currentEmail);
-    formData.append('otp', otp);
-    
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: formData
-    });
-    
-    const data = await response.json();
-    
-    console.log('Verify Response:', data); // For debugging
-    
-    if (data.success) {
-      sessionToken = data.sessionToken;
-      localStorage.setItem('partnerSession', sessionToken);
-      localStorage.setItem('partnerEmail', currentEmail);
-      
-      // Load dashboard
-      loadDashboard();
-    } else {
-      showMessage(messageDiv, data.message || 'Invalid OTP. Please try again.', 'error');
-      // Clear OTP inputs
-      otpInputs.forEach(input => input.value = '');
-      otpInputs[0].focus();
-    }
-    
-  } catch (error) {
-    console.error('Verify OTP error:', error);
-    showMessage(messageDiv, 'Verification failed. Please try again.', 'error');
-  } finally {
-    btnText.textContent = 'Verify & Login';
-  }
-}
-
-// ========================================
-// DASHBOARD LOADING - FIXED VERSION
-// ========================================
-async function loadDashboard() {
-  // Hide auth forms
-  document.getElementById('email-step').style.display = 'none';
-  document.getElementById('otp-step').style.display = 'none';
-  
-  // Show dashboard
-  const dashboardDiv = document.getElementById('dashboard');
-  dashboardDiv.style.display = 'block';
-  
-  // Set email
-  document.getElementById('dashboard-email').textContent = currentEmail;
-  
-  try {
-    const formData = new FormData();
-    formData.append('action', 'getDashboard');
-    formData.append('sessionToken', sessionToken);
-    
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: formData
-    });
-    
-    const data = await response.json();
-    
-    console.log('Dashboard Data:', data); // For debugging
-    
-    if (data.success) {
-      // Update stats
-      document.getElementById('total-referrals').textContent = data.totalReferrals || 0;
-      document.getElementById('successful-purchases').textContent = data.successfulPurchases || 0;
-      document.getElementById('total-earnings').textContent = (data.totalEarnings || 0).toFixed(2);
-      document.getElementById('referral-code').textContent = data.referralCode || 'N/A';
-      
-      // Update referrals table
-      updateReferralsTable(data.referrals || []);
-    } else {
-      alert('Failed to load dashboard data: ' + (data.message || 'Unknown error'));
-      logout();
-    }
-    
-  } catch (error) {
-    console.error('Dashboard load error:', error);
-    alert('Failed to load dashboard. Please try logging in again.');
-    logout();
-  }
-}
-
-// ========================================
-// REFERRALS TABLE
-// ========================================
-function updateReferralsTable(referrals) {
-  const tbody = document.getElementById('referrals-tbody');
-  
-  if (!referrals || referrals.length === 0) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="5" class="empty-state">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-          </svg>
-          <p>No referrals yet. Start sharing your code!</p>
-        </td>
-      </tr>
-    `;
-    return;
-  }
-  
-  tbody.innerHTML = referrals.map(ref => `
-    <tr>
-      <td>${formatDate(ref.date)}</td>
-      <td>${maskEmail(ref.userEmail)}</td>
-      <td>₹${ref.amount}</td>
-      <td><span class="status-badge ${ref.status}">${ref.status}</span></td>
-      <td>₹${ref.commission}</td>
-    </tr>
-  `).join('');
-}
-
-// ========================================
-// UTILITY FUNCTIONS
-// ========================================
-function backToEmail() {
-  document.getElementById('otp-step').style.display = 'none';
-  document.getElementById('email-step').style.display = 'block';
-  document.getElementById('otp-message').innerHTML = '';
-  document.querySelectorAll('.otp-digit').forEach(input => input.value = '');
-}
-
-function logout() {
-  localStorage.removeItem('partnerSession');
-  localStorage.removeItem('partnerEmail');
-  sessionToken = "";
-  currentEmail = "";
-  
-  document.getElementById('dashboard').style.display = 'none';
-  document.getElementById('email-step').style.display = 'block';
-  document.getElementById('partner-email').value = '';
-  document.getElementById('email-message').innerHTML = '';
-}
-
-function copyCode() {
-  const code = document.getElementById('referral-code').textContent;
-  navigator.clipboard.writeText(code).then(() => {
-    const btn = event.target;
-    const originalText = btn.textContent;
-    btn.textContent = 'Copied!';
-    setTimeout(() => {
-      btn.textContent = originalText;
-    }, 2000);
-  });
-}
-
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function showMessage(element, message, type) {
-  element.innerHTML = `<div class="message ${type}">${message}</div>`;
-}
-
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric' 
-  });
-}
-
-function maskEmail(email) {
-  const [username, domain] = email.split('@');
-  const masked = username.slice(0, 2) + '***' + username.slice(-1);
-  return masked + '@' + domain;
-}
-
-// OTP Input Auto-advance
-document.addEventListener('DOMContentLoaded', () => {
-  const otpInputs = document.querySelectorAll('.otp-digit');
-  
-  otpInputs.forEach((input, index) => {
-    input.addEventListener('input', (e) => {
-      if (e.target.value.length === 1 && index < otpInputs.length - 1) {
-        otpInputs[index + 1].focus();
-      }
-    });
-    
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Backspace' && !e.target.value && index > 0) {
-        otpInputs[index - 1].focus();
-      }
-    });
-    
-    // Only allow numbers
-    input.addEventListener('keypress', (e) => {
-      if (!/[0-9]/.test(e.key)) {
-        e.preventDefault();
-      }
-    });
-  });
-  
-  // Check for existing session
-  const savedSession = localStorage.getItem('partnerSession');
-  const savedEmail = localStorage.getItem('partnerEmail');
-  
-  if (savedSession && savedEmail) {
-    sessionToken = savedSession;
-    currentEmail = savedEmail;
-    switchTab('login');
-    loadDashboard();
-  }
-});
 </script>
 
 </body>
