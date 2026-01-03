@@ -424,12 +424,14 @@ header{
   .header-btn{
     padding:8px 16px;
     font-size:13px;
-  }
+ }
 }
 </style>
 </head>
 
 <body>
+<!-- TRACKER: count every page view -->
+<img src="https://script.google.com/macros/s/AKfycbwNUEnX74wu0pc_IjfUzbrUMhZmDoAD9EjL8jrYujV3zruqamCBE-q8vccV_8fhUv9mYg/exec?action=visit" width="1" height="1" style="display:none">
 
 <header>
   <div class="logo">MONEY<span>MASTERY</span></div>
@@ -521,7 +523,9 @@ header{
       placeholder="Enter Referral Code (Optional)"
       oninput="handleReferralChange()">
 
-    <button class="buy-btn" id="buyButton" onclick="buyNow()">BUY NOW</button>
+    <!-- TRACKER: count Buy-button click -->
+    <button class="buy-btn" id="buyButton" 
+            onclick="fetch('https://script.google.com/macros/s/AKfycbwNUEnX74wu0pc_IjfUzbrUMhZmDoAD9EjL8jrYujV3zruqamCBE-q8vccV_8fhUv9mYg/exec?action=buyClick'); buyNow()">BUY NOW</button>
    
    <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-top:20px;">
     This is a <strong style="color:var(--text)">digital product</strong>. No physical item will be shipped. After successful payment, you will get instant access to the product download page to download all files. Please ensure you download all PDFs before leaving the download page.
