@@ -753,12 +753,17 @@
             const metricsGrid = document.getElementById('metricsGrid');
             
             const metrics = [
-                { label: 'Total Partners', value: data.totalPartners || 0, icon: '👥', isCurrency: false },
-                { label: 'Pending Applications', value: data.pendingApplications || 0, icon: '⏳', isCurrency: false },
-                { label: 'Approved Partners', value: data.approvedPartners || 0, icon: '✅', isCurrency: false },
-                { label: 'Total Sales', value: data.totalSales || 0, icon: '🛒', isCurrency: false },
-                { label: 'Total Revenue', value: data.totalRevenue || 0, icon: '💵', isCurrency: true },
-                { label: 'Total Commissions', value: data.totalCommissions || 0, icon: '💰', isCurrency: true }
+                // --- NEW ANALYTICS COUNTERS ---
+                { label: 'Page Visits',      value: data.pageVisits      || 0, icon: '👁️', isCurrency: false },
+                { label: 'Partner Clicks',   value: data.partnerClicks || 0, icon: '🤝', isCurrency: false },
+                { label: 'Buy Clicks',       value: data.buyClicks     || 0, icon: '🛒', isCurrency: false },
+                // --------------------------------
+                { label: 'Total Partners',        value: data.totalPartners       || 0, icon: '👥', isCurrency: false },
+                { label: 'Pending Applications',  value: data.pendingApplications || 0, icon: '⏳', isCurrency: false },
+                { label: 'Approved Partners',     value: data.approvedPartners    || 0, icon: '✅', isCurrency: false },
+                { label: 'Total Sales',           value: data.totalSales          || 0, icon: '🛒', isCurrency: false },
+                { label: 'Total Revenue',         value: data.totalRevenue        || 0, icon: '💵', isCurrency: true },
+                { label: 'Total Commissions',     value: data.totalCommissions    || 0, icon: '💰', isCurrency: true }
             ];
 
             metricsGrid.innerHTML = metrics.map(metric => `
